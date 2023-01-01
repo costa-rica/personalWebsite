@@ -10782,7 +10782,7 @@ textarea.form-control-lg {
 :root {
   --social_icon_img_height: 5vh;
   --nick_page_theme_font_color: --bs-gray-900;
-  --std_framing_border_color:rgba(233, 84, 32, .6);
+  --std_framing_border_color: rgba(233, 84, 32, .6);
 }
 
 body {
@@ -10834,6 +10834,20 @@ body {
 .home_page .bio_and_ws p {
   text-align: justify;
 }
+.home_page .bio_and_ws .div_link_to_rest {
+  display: flex;
+  justify-content: end;
+  font-size: 1.9vh;
+}
+.home_page .bio_and_ws .div_link_to_rest a {
+  padding-left: 0.3rem;
+  text-decoration: none;
+  color: black;
+}
+.home_page .bio_and_ws .div_link_to_rest a:hover {
+  border: 0.5rem solid var(--bs-orange);
+  border-radius: 1.75rem;
+}
 .home_page .ws_logo_small {
   height: 8rem;
   float: right;
@@ -10849,7 +10863,8 @@ body {
   font-size: 1.9vh;
 }
 .home_page .recent_posts a {
-  text-decoration: none; /* no underline */
+  text-decoration: none;
+  /* no underline */
   color: var(--nick_page_theme_font_color);
 }
 .home_page .recent_posts a:hover {
@@ -10893,6 +10908,13 @@ body {
 }
 .home_page .recent_posts .Stackoverflow {
   background-color: rgba(233, 84, 32, 0.6);
+}
+.home_page .recent_posts .Github {
+  background-color: rgba(0, 0, 0, 0.6);
+  color: white;
+}
+.home_page .recent_posts .Github .span_dark {
+  color: var(--bs-gray-400);
 }
 .home_page .recent_posts .bubble_count {
   background: rgba(0, 0, 0, 0);
@@ -10941,6 +10963,75 @@ body {
   padding-left: 1rem;
 }
 
+.rest_of_posts .ws_logo_small {
+  height: 8rem;
+  float: right;
+}
+.rest_of_posts .recent_posts {
+  display: grid;
+  gap: 1rem;
+  border-radius: 3rem;
+  background-color: var(--bs-gray-500);
+  padding: 2rem 1rem;
+}
+.rest_of_posts .recent_posts .recent_posts_title {
+  font-size: 1.9vh;
+}
+.rest_of_posts .recent_posts a {
+  text-decoration: none;
+  /* no underline */
+  color: var(--nick_page_theme_font_color);
+}
+.rest_of_posts .recent_posts a:hover {
+  border: 0.5rem solid var(--bs-orange);
+  border-radius: 1.75rem;
+}
+.rest_of_posts .recent_posts .posts_dict_frame {
+  border-radius: 1rem;
+  border: 1px solid var(--bs-orange);
+  border-width: 0.25em;
+  padding: 1rem;
+  height: 5rem;
+}
+.rest_of_posts .recent_posts .standard_social {
+  display: flex;
+  flex-wrap: wrap;
+  border-radius: 1rem;
+  padding: 1rem;
+  color: var(--nick_page_theme_font_color);
+}
+.rest_of_posts .recent_posts .standard_social .img_social_icon img {
+  height: var(--social_icon_img_height);
+}
+.rest_of_posts .recent_posts .standard_social .sub_title {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+.rest_of_posts .recent_posts .standard_social .sub_title_date {
+  color: var(--bs-gray-200);
+  width: 100%;
+}
+.rest_of_posts .recent_posts .standard_social .sub_post {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  height: 100%;
+}
+.rest_of_posts .recent_posts .Twitter {
+  background-color: rgba(0, 123, 255, 0.6);
+}
+.rest_of_posts .recent_posts .Stackoverflow {
+  background-color: rgba(233, 84, 32, 0.6);
+}
+.rest_of_posts .recent_posts .Github {
+  background-color: rgba(0, 0, 0, 0.6);
+  color: white;
+}
+.rest_of_posts .recent_posts .Github .span_dark {
+  color: var(--bs-gray-400);
+}
+
 @media only screen and (min-width: 992px) {
   .home_page .grid-col-span-2 {
     grid-column: span 2;
@@ -10962,12 +11053,17 @@ body {
     height: 100%;
     border-radius: 3rem;
   }
-  .home_page .handles_div {
-    font-size: 1.7vw;
-  }
   .home_page .handles_div .handle_std {
-    font-size: 1.9vw;
     padding-left: 0;
+  }
+  .home_page .recent_posts a {
+    text-decoration: none;
+    /* no underline */
+    color: var(--nick_page_theme_font_color);
+  }
+  .home_page .recent_posts a:hover {
+    border: 0.5rem solid var(--bs-orange);
+    border-radius: 1.75rem;
   }
 }
 

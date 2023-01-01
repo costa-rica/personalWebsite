@@ -1,0 +1,26 @@
+{% extends "_layout.html" %}
+{% block main %}
+
+<div class="main">
+  <div class="rest_of_posts">
+    <div class="page_name">
+      <h1>More About Me</h1>
+    </div>
+    <div class="div_link_to_home">
+      <a href="{{ url_for('main.home') }}"> Back home ...</a>
+    </div>
+
+
+
+      <div class="recent_posts">
+
+        For most of my training I was leaning on models with small datasets that tried to be very precise. But as technology has improved and datasets have gotten larger, I’ve found myself more convinced by simpler models that use large datasets. The trends shared over larger sets of data just seem to be more convincing and enough to say “ok, this might not be the whole story, but its enough of the story to start doing things this way”. 
+      </div>
+      
+
+    </div>
+  </div>
+  
+
+  
+  {% endblock %}

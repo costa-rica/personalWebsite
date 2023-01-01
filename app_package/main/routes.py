@@ -115,6 +115,7 @@ def rest_of_posts():
 
 
 
+
     social_posts = sess.query(SocialPosts).order_by(desc(SocialPosts.post_date)).all()
     
     # social_posts = social_posts[0] + social_posts[14]
@@ -144,3 +145,10 @@ def rest_of_posts():
         counter += 1
 
     return render_template('rest_of_posts.html', display_post = display_post)
+
+
+
+
+@main.route('/more_about_me')
+def more_about_me():
+    return render_template('more_about_me.html')

@@ -2,60 +2,67 @@
 {% block main %}
 
 <div class="main">
-  <div class="home_page">
-    <div class="page_name"><h1>Rest of my posts</h1>
+  <div class="rest_of_posts">
+    <div class="page_name">
+      <h1>Rest of my posts</h1>
     </div>
     <div class="div_link_to_home">
       <a href="{{ url_for('main.home') }}"> Back home ...</a>
     </div>
-    <section class="home">
+    <!-- <section class="home"> -->
 
 
-      <div class="grid-col-span-2 recent_posts">
+      <div class="recent_posts">
 
+
+                  {% for post in display_post %}
+
+                    <a href="{{ post.url }}">
+                      
+                      <div class="{{ post.social_name }} standard_social" >
+
+                        <div class="sub_title_date">
+                          {{ post.post_date }}
+                        </div>
+
+      
+                        <div class="sub_title">
+      
+                          <div class="standard_title">
+                            {% if post.social_name == "Github" %}
         
-        {% for post in display_post %}
+                              <span class="span_dark">Repoository Name: </span>{{ post.title }}
+                              {% else %}
+                              {{ post.title }}
+                            {% endif %}
+        
+                            {% if post.description != None %}
+                              <br>
+                              <small>{{ post.description }}</small>
+                            {% endif %}
+                          </div>
+                        
+                          <div class="img_social_icon">
+                            <img  src="../static/images/icons/{{ post.social_icon }}" >
+                          </div>
+                        
+                        </div>
+                      
+      
+      
+                      </div>
+                    </a>   
+                  {% endfor %}
 
-
-
-          <a href="{{ post.url }}">
-            
-          <div class="{{ post.social_name }} standard_social" >
-
-            <!-- <div class="sub_post"> -->
-              <div class="sub_title_date">
-                {{ post.post_date }}
-              </div>
-              
-            <!-- </div> -->
-
-            <div class="sub_title">
-
-              <div class="standard_title">
-                {{ post.title }} 
-              </div>
-              
-              <div class="img_social_icon">
-                <img  src="../static/images/icons/{{ post.social_icon }}" >
-              </div>
-              
-            </div>
-            
-
-
-          </div>
-        </a>
-
-
-        {% endfor %}
 
         
       </div>
       
 
 
-    </section>
+    <!-- </section> -->
   </div>
 </div>
+
 
 {% endblock %}

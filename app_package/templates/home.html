@@ -24,8 +24,13 @@
             <p>
               
               
-              As an economist for 15 years, I started to see the immense power that large datasets could have. For most of my training I was leaning on models with small datasets that tried to be very precise. But as technology has improved and datasets have gotten larger, I’ve found myself more convinced by simpler models that use large datasets. The trends shared over larger sets of data just seem to be more convincing and enough to say “ok, this might not be the whole story, but its enough of the story to start doing things this way”.
+              As an economist for 15 years, I started to see the immense power that large datasets could have and I wanted to be leverage it for things I think the world could use.
+
             </p>
+            <div class="div_link_to_rest">
+              <a href="{{ url_for('main.more_about_me') }}"> more ...</a>
+            </div>
+            
         </div>
 
           
@@ -48,7 +53,7 @@
         </div>
       </div>
 
-      <div class="grid-col-span-2 recent_posts">
+      <div class="grid-col-span-2 recent_posts std_framing">
         <div class="recent_posts_title">
           Here are some of my recent posts
         </div>
@@ -85,7 +90,20 @@
             <div class="sub_title">
 
               <div class="standard_title">
-                {{ post.title }} 
+                
+
+                {% if post.social_name == "Github" %}
+
+                  <span class="span_dark">Repoository Name: </span>{{ post.title }}
+                  {% else %}
+                  {{ post.title }}
+                {% endif %}
+
+                {% if post.description != None %}
+                  <br>
+                  <small>{{ post.description }}</small>
+                {% endif %}
+
               </div>
               
               <div class="img_social_icon">
