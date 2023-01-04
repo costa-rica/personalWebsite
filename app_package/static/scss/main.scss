@@ -331,13 +331,38 @@ body {
       }
     }
 
+    .pagination_parent{
+      display: flex;
+      justify-content: end;
+      padding: 3rem 5rem 0 0;
+      font-size:large;
+    }
 
+    .pagination_section {
+      position: relative;
+
+    }
+
+    .pagination_section a {
+      color: black;
+      padding: 10px 8px;
+      text-decoration: none;
+    }
+
+    .pagination_section a:hover:not(.active) {
+      color:white
+    }
+
+    .active{
+      border: 3px solid black;
+    }
 
 
   }
-
-
-
+  .pagination_show{
+    display: flex;
+    justify-content: end;
+  }
 }
 
 

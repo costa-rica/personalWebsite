@@ -3,52 +3,55 @@
 
 <div class="main">
   <div class="home_page">
-    <div class="page_name"><h1>Nick's Personal Page</h1>
-      
-      
-    
+    <div class="page_name">
+      <h1>Nick's Personal Page</h1>
+
+
+
     </div>
 
     <section class="home">
-      
+
       <div class="std_framing image_div_lg">
         <img class="image_me_lg" src="../static/images/20200922_144128005_iOS_edited.jpg" alt="Picture of Nick">
-      
+
       </div>
       <div class="grid-col-span-2 bio_and_ws ">
-        
+
         <div class="center_me">
           <div class="std_framing bio_div">I am an <a href="https://www.whatisanindiemaker.com/">indie maker</a>.
 
             <img class="image_me_small" src="../static/images/20200922_144128005_iOS_edited.jpg" alt="Picture of Nick">
             <p>
-              
-              
-              As an economist for 15 years, I started to see the immense power that large datasets could have and I wanted to be leverage it for things I think the world could use.
+
+
+              As an economist for 15 years, I started to see the immense power that large datasets could have and I
+              wanted to be leverage it for things I think the world could use.
 
             </p>
             <div class="div_link_to_rest">
               <a href="{{ url_for('main.more_about_me') }}"> more ...</a>
             </div>
-            
-        </div>
 
-          
-
+          </div>
 
         </div>
 
 
 
         <div class="std_framing ws_div">
-          What Sticks (WS) is an application that helps navigate your wellness with data already being collected by your other applications and devices. 
+          What Sticks (WS) is an application that helps navigate your wellness with data already being collected by your
+          other applications and devices.
           <a href="https://what-sticks.com">
-            <img class="ws_logo_small" src="../static/images/wshLogo_300px_doodle02.png" >
+            <img class="ws_logo_small" src="../static/images/wshLogo_300px_doodle02.png">
 
           </a>
 
           <br>
-          The primary driver for building What Sticks is a desire to leverage data that I know already exists to build meaningful and personalized wellness benchmarks. I believe that with a little bit of navigating our everyday applications and devices can start working to provide us insights that really move the needle and improve our lives. 
+          The primary driver for building What Sticks is a desire to leverage data that I know already exists to build
+          meaningful and personalized wellness benchmarks. I believe that with a little bit of navigating our everyday
+          applications and devices can start working to provide us insights that really move the needle and improve our
+          lives.
 
         </div>
       </div>
@@ -57,111 +60,111 @@
         <div class="recent_posts_title">
           Here are some of my recent posts
         </div>
-        
+
         {% for post in display_post %}
 
-          {% if post.counter %}
+        {% if post.counter %}
 
-          <div class="{{ post.social_name }} bubble_count">
+        <div class="{{ post.social_name }} bubble_count">
 
-            <div class="bubble_title">
-              {{ post.counter }} posts from {{ post.social_name }}
-            </div>
-            
-            <div class="img_social_icon">
-              <img  src="../static/images/icons/{{ post.social_icon }}" >
-            </div>
-
+          <div class="bubble_title">
+            {{ post.counter }} posts from {{ post.social_name }}
           </div>
 
-          {% else %}
+          <div class="img_social_icon">
+            <img src="../static/images/icons/{{ post.social_icon }}">
+          </div>
 
-          <a href="{{ post.url }}">
-            
-          <div class="{{ post.social_name }} standard_social" >
+        </div>
+
+        {% else %}
+
+        <a href="{{ post.url }}">
+
+          <div class="{{ post.social_name }} standard_social">
 
             <!-- <div class="sub_post"> -->
-              <div class="sub_title_date">
-                {{ post.post_date }}
-              </div>
-              
+            <div class="sub_title_date">
+              {{ post.post_date }}
+            </div>
+
             <!-- </div> -->
 
             <div class="sub_title">
 
               <div class="standard_title">
-                
+
 
                 {% if post.social_name == "Github" %}
 
-                  <span class="span_dark">Repoository Name: </span>{{ post.title }}
-                  {% else %}
-                  {{ post.title }}
+                <span class="span_dark">Repoository Name: </span>{{ post.title }}
+                {% else %}
+                {{ post.title }}
                 {% endif %}
 
                 {% if post.description != None %}
-                  <br>
-                  <small>{{ post.description }}</small>
+                <br>
+                <small>{{ post.description }}</small>
                 {% endif %}
 
               </div>
-              
+
               <div class="img_social_icon">
-                <img  src="../static/images/icons/{{ post.social_icon }}" >
+                <img src="../static/images/icons/{{ post.social_icon }}">
               </div>
-              
+
             </div>
-            
+
 
 
           </div>
         </a>
 
-          {% endif %}
+        {% endif %}
 
         {% endfor %}
         <div class="div_link_to_rest">
-          <a href="{{ url_for('main.rest_of_posts') }}"> See more  here ...</a>
+          <a href="{{ url_for('main.rest_of_posts', pagination_position=1) }}"> See more here ...</a>
         </div>
-        
+
       </div>
-      
+
       <div class="std_framing handles_div">
         <div class="handles_div_title">
           You can find me
         </div>
-        
+
         <br>
 
         <div class="handle_std ">
           Medium: <a href="https://medium.com/@nrodrig1">Nick Rodriguez</a>
         </div>
-        
+
         <!-- <br> -->
         <div class="handle_std">
           Twitter: <a href="https://twitter.com/EvryMnRodriguez">@EvryMnRodriguez</a>
         </div>
-        
+
         <!-- <br> -->
         <div class="handle_std">
           Github: <a href="https://github.com/costa-rica">costa-rica</a>
         </div>
-        
+
         <!-- <br> -->
         <div class="handle_std">
           LinkedIn: <a href="https://www.linkedin.com/in/nick-rodriguez-0a31a133/">Nick Rodriguez</a>
         </div>
-        
+
         <!-- <br> -->
         <div class="handle_std">
           Goodreads: <a href="https://www.goodreads.com/costa-rica">costa-rica</a>
         </div>
-        
+
         <!-- <br> -->
         <div class="handle_std">
           Email: nick@dashanddata.com
         </div>
-        
+
 
 
       </div>

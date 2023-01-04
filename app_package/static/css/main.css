@@ -11031,6 +11031,30 @@ body {
 .rest_of_posts .recent_posts .Github .span_dark {
   color: var(--bs-gray-400);
 }
+.rest_of_posts .recent_posts .pagination_parent {
+  display: flex;
+  justify-content: end;
+  padding: 3rem 5rem 0 0;
+  font-size: large;
+}
+.rest_of_posts .recent_posts .pagination_section {
+  position: relative;
+}
+.rest_of_posts .recent_posts .pagination_section a {
+  color: black;
+  padding: 10px 8px;
+  text-decoration: none;
+}
+.rest_of_posts .recent_posts .pagination_section a:hover:not(.active) {
+  color: white;
+}
+.rest_of_posts .recent_posts .active {
+  border: 3px solid black;
+}
+.rest_of_posts .pagination_show {
+  display: flex;
+  justify-content: end;
+}
 
 @media only screen and (min-width: 992px) {
   .home_page .grid-col-span-2 {

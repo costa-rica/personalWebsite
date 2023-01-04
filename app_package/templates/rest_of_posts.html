@@ -12,53 +12,76 @@
     <!-- <section class="home"> -->
 
 
-      <div class="recent_posts">
+    <div class="recent_posts">
 
 
-                  {% for post in display_post %}
+      {% for post in display_post %}
 
-                    <a href="{{ post.url }}">
-                      
-                      <div class="{{ post.social_name }} standard_social" >
+      <a href="{{ post.url }}">
 
-                        <div class="sub_title_date">
-                          {{ post.post_date }}
-                        </div>
+        <div class="{{ post.social_name }} standard_social">
+
+          <div class="sub_title_date">
+            {{ post.post_date }}
+          </div>
+
+
+          <div class="sub_title">
+
+            <div class="standard_title">
+              {% if post.social_name == "Github" %}
+
+              <span class="span_dark">Repoository Name: </span>{{ post.title }}
+              {% else %}
+              {{ post.title }}
+              {% endif %}
+
+              {% if post.description != None %}
+              <br>
+              <small>{{ post.description }}</small>
+              {% endif %}
+            </div>
+
+            <div class="img_social_icon">
+              <img src="../static/images/icons/{{ post.social_icon }}">
+            </div>
+
+          </div>
+
+
+
+        </div>
+      </a>
+      {% endfor %}
 
       
-                        <div class="sub_title">
-      
-                          <div class="standard_title">
-                            {% if post.social_name == "Github" %}
-        
-                              <span class="span_dark">Repoository Name: </span>{{ post.title }}
-                              {% else %}
-                              {{ post.title }}
-                            {% endif %}
-        
-                            {% if post.description != None %}
-                              <br>
-                              <small>{{ post.description }}</small>
-                            {% endif %}
-                          </div>
-                        
-                          <div class="img_social_icon">
-                            <img  src="../static/images/icons/{{ post.social_icon }}" >
-                          </div>
-                        
-                        </div>
-                      
-      
-      
-                      </div>
-                    </a>   
-                  {% endfor %}
+      <div class="pagination_parent">
+        <div class="pagination_section">
 
+          {% if pagination_dict['current'] != 1 %}
+          <a href="{{ url_for('main.rest_of_posts', pagination_position=pagination_dict['first']) }}" >First page</a>
+  
+          <a href="{{ url_for('main.rest_of_posts', pagination_position=pagination_dict['previous']) }}" >{{ pagination_dict['previous']  }}</a>
+          {% endif %}
+          <a href="#" class="active">{{ pagination_dict['current'] }}</a>
 
-        
+          {% if pagination_dict['current'] != number_of_pages %}
+          <a href="{{ url_for('main.rest_of_posts', pagination_position=pagination_dict['next']) }}" >{{ pagination_dict['next'] }}</a>
+  
+          <a href="{{ url_for('main.rest_of_posts', pagination_position=pagination_dict['last_page']) }}" >Last page</a>
+          {% endif %}
+        </div>
       </div>
-      
 
+
+
+    </div>
+    <div class="pagination_show">
+      Show: 
+      <a href="{{ url_for('main.rest_of_posts', pagination_position=pagination_dict['current']) }}" >10</a>, 
+      <a href="{{ url_for('main.rest_of_posts', pagination_position=pagination_dict['current']) }}" >100</a>, 
+      <a href="{{ url_for('main.rest_of_posts', pagination_position=pagination_dict['current']) }}" >All()</a>
+    </div>
 
     <!-- </section> -->
   </div>
