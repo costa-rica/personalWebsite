@@ -2,8 +2,8 @@ from flask import Blueprint
 from flask import render_template, url_for, redirect, flash, request, current_app
 import os
 # from app_package.models import SocialPosts, sess
-from sc_models import SocialPosts, sess
-from sqlalchemy import desc
+# from sc_models import SocialPosts, sess
+# from sqlalchemy import desc
 import logging
 from logging.handlers import RotatingFileHandler
 import pandas as pd

@@ -1,5 +1,5 @@
 from flask import Flask
-from sc_config import ConfigLocal, ConfigDev, ConfigProd
+from app_package.config import ConfigLocal, ConfigDev, ConfigProd
 import os
 import logging
 from logging.handlers import RotatingFileHandler
