@@ -16,8 +16,9 @@ class ConfigBase:
         self.SECRET_KEY = config.get('SECRET_KEY')
         self.PROJ_ROOT_PATH = os.environ.get('PROJ_ROOT_PATH')
         self.PROJ_DB_PATH = os.environ.get('PROJ_DB_PATH')
+        self.SOCIAL_DF_FILE_NAME = 'df_social_activity.pkl'
+        self.DESTINATION_PASSWORD = config.get('DESTINATION_PASSWORD')
 
-            
 
 class ConfigLocal(ConfigBase):
 

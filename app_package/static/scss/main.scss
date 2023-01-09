@@ -177,6 +177,10 @@ body {
       }
     }
 
+    .Goodreads {
+      background-color: rgba(111, 78, 55, .6);
+    }
+
     .bubble_count {
       background: rgba(0, 0, 0, 0.0);
       border: .25em dotted;
@@ -329,6 +333,10 @@ body {
       .span_dark {
         color: var(--bs-gray-400)
       }
+    }
+
+    .Goodreads {
+      background-color: rgba(111, 78, 55, .6);
     }
 
     .pagination_parent{

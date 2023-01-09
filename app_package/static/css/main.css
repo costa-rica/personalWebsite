@@ -10916,6 +10916,9 @@ body {
 .home_page .recent_posts .Github .span_dark {
   color: var(--bs-gray-400);
 }
+.home_page .recent_posts .Goodreads {
+  background-color: rgba(111, 78, 55, 0.6);
+}
 .home_page .recent_posts .bubble_count {
   background: rgba(0, 0, 0, 0);
   border: 0.25em dotted;
@@ -11030,6 +11033,9 @@ body {
 }
 .rest_of_posts .recent_posts .Github .span_dark {
   color: var(--bs-gray-400);
+}
+.rest_of_posts .recent_posts .Goodreads {
+  background-color: rgba(111, 78, 55, 0.6);
 }
 .rest_of_posts .recent_posts .pagination_parent {
   display: flex;

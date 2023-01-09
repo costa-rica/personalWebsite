@@ -1,5 +1,6 @@
 from flask import Blueprint
-from flask import render_template, url_for, redirect, flash, request, current_app
+from flask import render_template, url_for, redirect, flash, request, current_app, jsonify, \
+    make_response
 import os
 # from app_package.models import SocialPosts, sess
 # from sc_models import SocialPosts, sess
@@ -8,16 +9,10 @@ import logging
 from logging.handlers import RotatingFileHandler
 import pandas as pd
 
+
 main = Blueprint('main', __name__)
 
 
-
-# if os.environ.get('CONFIG_TYPE')=='local':
-#     config_context = ConfigLocal()
-# elif os.environ.get('CONFIG_TYPE')=='dev':
-#     config_context = ConfigDev()
-# elif os.environ.get('CONFIG_TYPE')=='prod':
-#     config_context = ConfigProd()
 
 
 #Setting up Logger
@@ -32,7 +27,7 @@ logger_main.setLevel(logging.DEBUG)
 
 #where do we store logging information
 # file_handler = RotatingFileHandler(os.path.join(logs_dir,'users_routes.log'), mode='a', maxBytes=5*1024*1024,backupCount=2)
-file_handler = RotatingFileHandler(os.path.join(os.environ.get('PROJ_ROOT_PATH'),'logs','users_routes.log'), mode='a', maxBytes=5*1024*1024,backupCount=2)
+file_handler = RotatingFileHandler(os.path.join(os.environ.get('PROJ_ROOT_PATH'),'logs','main_routes.log'), mode='a', maxBytes=5*1024*1024,backupCount=2)
 file_handler.setFormatter(formatter)
 
 #where the stream_handler will print
@@ -49,7 +44,7 @@ def home():
     logger_main.info(f"- in home page: / ")
     # social_posts = sess.query(SocialPosts).order_by(desc(SocialPosts.post_date)).all()
     
-    social_posts_df = pd.read_pickle(os.path.join(current_app.config.get('PROJ_DB_PATH'), 'df_existing.pkl'))
+    social_posts_df = pd.read_pickle(os.path.join(current_app.config.get('PROJ_DB_PATH'), current_app.config.get('SOCIAL_DF_FILE_NAME')))
     social_posts_df['post_date_to_datetime'] = pd.to_datetime(social_posts_df['post_date'])
     social_posts_list_of_dicts = social_posts_df.sort_values('post_date_to_datetime', ascending=False).to_dict('records')
 
@@ -107,18 +102,19 @@ def home():
 
 
 
-    div_class = "Twitter"
-    print('--- display_post ---')
-    print("length: ", len(display_post))
-    print(display_post)
-    return render_template('home.html', display_post = display_post, div_class=div_class)
+    # div_class = "Twitter"
+    # print('--- display_post ---')
+    # print("length: ", len(display_post))
+    # print(display_post)
+    # return render_template('home.html', display_post = display_post, div_class=div_class)
+    return render_template('home.html', display_post = display_post)
 
 
 @main.route('/rest_of_posts', methods=['GET','POST'])
 def rest_of_posts():
 
-
-    social_posts_df = pd.read_pickle(os.path.join(current_app.config.get('PROJ_DB_PATH'), 'df_existing.pkl'))
+    social_posts_df = pd.read_pickle(os.path.join(current_app.config.get('PROJ_DB_PATH'), current_app.config.get('SOCIAL_DF_FILE_NAME')))
+    # social_posts_df = pd.read_pickle(os.path.join(current_app.config.get('PROJ_DB_PATH'), 'df_existing.pkl'))
     social_posts_df['post_date_to_datetime'] = pd.to_datetime(social_posts_df['post_date'])
     social_posts_list_of_dicts = social_posts_df.sort_values('post_date_to_datetime', ascending=False).to_dict('records')
 
@@ -190,3 +186,73 @@ def rest_of_posts():
 @main.route('/more_about_me')
 def more_about_me():
     return render_template('more_about_me.html')
+
+
+@main.route('/collect_new_activity', methods=['GET','POST'])
+def collect_new_activity():
+    print('------------------------------------------')
+    print('- recieved call to collect_new_activity - ')
+    # print('PASSword: ', current_app.config.get('DESTINATION_PASSWORD'))
+    
+    request_data = request.get_json()
+    print(dir(request))
+    request_headers = request.headers
+    print('request headers Password : ', request_headers.get('password'))
+    print('request headers All: ', request_headers.get('password'))
+
+
+    # print('received data: ', request_data.get('password'))
+    # print('--- All Received Data ---')
+    # print(request_data)
+
+    if request_headers.get('password') == current_app.config.get('DESTINATION_PASSWORD'):
+        logger_main.info(f'--- collect_new_activity endpoint PASSWORD verified ---')
+            
+        print(len(request_data.get('new_activity')))
+
+        # put new post data into df_new_data
+        df_new_data = pd.DataFrame(request_data.get('new_activity'))
+
+        print('-- df_new_data --')
+        print('Length of new data: ', len(df_new_data))
+        print(df_new_data.head())
+
+        # get existing web data from df_existing
+
+        # df_to_add removes any already existing form df_new_data
+
+        # concat df_to_add to df_existing
+
+        #df_existing.to_pickle
+
+
+
+        if os.path.exists(os.path.join(current_app.config.get('PROJ_DB_PATH'),current_app.config.get('SOCIAL_DF_FILE_NAME'))):
+            # df_from_db = get_db_social_activity()
+            df_existing = pd.read_pickle(os.path.join(current_app.config.get('PROJ_DB_PATH'),current_app.config.get('SOCIAL_DF_FILE_NAME')))
+            ### make unique index from network_post_id, social_name, title
+            df_new_data.set_index(['network_post_id', 'social_name','title'], inplace=True)
+            df_existing.set_index(['network_post_id', 'social_name','title'], inplace=True)
+
+            df_to_add = df_new_data[~df_new_data.index.isin(df_existing.index)]
+
+            print('Length of df_to_add: ', len(df_to_add))
+
+            #Append to df_exisitng
+            df_mirror = pd.concat([df_existing, df_to_add]).reset_index()
+            #df_existing to pickle
+            df_mirror.to_pickle(os.path.join(current_app.config.get('PROJ_DB_PATH'),current_app.config.get('SOCIAL_DF_FILE_NAME')))
+        
+        else:# - All data is new
+            # df_to_add = get_db_social_activity()
+            df_new_data.to_pickle(os.path.join(current_app.config.get('PROJ_DB_PATH'),current_app.config.get('SOCIAL_DF_FILE_NAME')))
+
+
+
+
+
+        return jsonify({"message": "successfully added new social activity"})
+    else:
+        logger_main.info(f'- password NOT verified -')
+        return make_response('Could not verify',401)
+
