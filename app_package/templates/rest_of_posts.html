@@ -29,16 +29,23 @@
           <div class="sub_title">
 
             <div class="standard_title">
+
               {% if post.social_name == "Github" %}
 
-              <span class="span_dark">Repoository Name: </span>{{ post.title }}
-              {% else %}
-              {{ post.title }}
-              {% endif %}
+                <span class="span_dark">Repoository Name: </span>{{ post.title }}
+                <br>
+                <small>{{ post.description }}</small>
 
-              {% if post.description != None %}
-              <br>
-              <small>{{ post.description }}</small>
+              {% elif post.social_name == "Goodreads" %}
+
+                Just finished reading: <br> {{ post.title }}
+                <br>
+                <small> by {{ post.description }}</small>
+
+              {% else %}
+
+                {{ post.title }}
+
               {% endif %}
             </div>
 
@@ -59,16 +66,16 @@
         <div class="pagination_section">
 
           {% if pagination_dict['current'] != 1 %}
-          <a href="{{ url_for('main.rest_of_posts', pagination_position=pagination_dict['first']) }}" >First page</a>
+          <a href="{{ url_for('main.rest_of_posts', pagination_position=pagination_dict['first'], size_of_lists_for_pagination=size_of_lists_for_pagination) }}" >First page</a>
   
-          <a href="{{ url_for('main.rest_of_posts', pagination_position=pagination_dict['previous']) }}" >{{ pagination_dict['previous']  }}</a>
+          <a href="{{ url_for('main.rest_of_posts', pagination_position=pagination_dict['previous'], size_of_lists_for_pagination=size_of_lists_for_pagination) }}" >{{ pagination_dict['previous']  }}</a>
           {% endif %}
           <a href="#" class="active">{{ pagination_dict['current'] }}</a>
 
           {% if pagination_dict['current'] != number_of_pages %}
-          <a href="{{ url_for('main.rest_of_posts', pagination_position=pagination_dict['next']) }}" >{{ pagination_dict['next'] }}</a>
+          <a href="{{ url_for('main.rest_of_posts', pagination_position=pagination_dict['next'], size_of_lists_for_pagination=size_of_lists_for_pagination) }}" >{{ pagination_dict['next'] }}</a>
   
-          <a href="{{ url_for('main.rest_of_posts', pagination_position=pagination_dict['last_page']) }}" >Last page</a>
+          <a href="{{ url_for('main.rest_of_posts', pagination_position=pagination_dict['last_page'], size_of_lists_for_pagination=size_of_lists_for_pagination) }}" >Last page</a>
           {% endif %}
         </div>
       </div>
@@ -78,9 +85,9 @@
     </div>
     <div class="pagination_show">
       Show: 
-      <a href="{{ url_for('main.rest_of_posts', pagination_position=pagination_dict['current']) }}" >10</a>, 
-      <a href="{{ url_for('main.rest_of_posts', pagination_position=pagination_dict['current']) }}" >100</a>, 
-      <a href="{{ url_for('main.rest_of_posts', pagination_position=pagination_dict['current']) }}" >All()</a>
+      <a href="{{ url_for('main.rest_of_posts', pagination_position=1, size_of_lists_for_pagination=10) }}" >10</a>, 
+      <a href="{{ url_for('main.rest_of_posts', pagination_position=1, size_of_lists_for_pagination=100) }}" >100</a>, 
+      <a href="{{ url_for('main.rest_of_posts', pagination_position=1, size_of_lists_for_pagination=0) }}" >All</a>
     </div>
 
     <!-- </section> -->

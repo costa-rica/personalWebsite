@@ -3,56 +3,89 @@
 
 <div class="main">
   <div class="home_page">
-    <div class="page_name">
+    <!-- <div class="page_name">
       <h1>Nick's Personal Page</h1>
 
 
 
-    </div>
+    </div> -->
 
     <section class="home">
 
-      <div class="std_framing image_div_lg">
-        <img class="image_me_lg" src="../static/images/20200922_144128005_iOS_edited.jpg" alt="Picture of Nick">
+      <div class="std_framing hide_small">
+        <div class="image_div_lg">
+          <img class="image_me_lg" src="../static/images/20200922_144128005_iOS_edited.jpg" alt="Picture of Nick">
+        </div>
+        
 
       </div>
       <div class="grid-col-span-2 bio_and_ws ">
 
-        <div class="center_me">
-          <div class="std_framing bio_div">I am an <a href="https://www.whatisanindiemaker.com/">indie maker</a>.
+        <!-- <div class="center_me"> -->
+        <div class="page_title">
+          <h1>Hi, I'm Nick &#128075</h1>
+        </div>
 
-            <img class="image_me_small" src="../static/images/20200922_144128005_iOS_edited.jpg" alt="Picture of Nick">
-            <p>
+        <div class="std_framing bio_div">
+
+          <!-- <img class="image_me_small" src="../static/images/20200922_144128005_iOS_edited.jpg" alt="Picture of Nick"> -->
+
+          <div class="bio_div_sub">
 
 
-              As an economist for 15 years, I started to see the immense power that large datasets could have and I
-              wanted to be leverage it for things I think the world could use.
+            <div class="bio_div_sub_non_title">
+              <div class="bio_words">
+                <img class="image_me_small" src="../static/images/20200922_144128005_iOS_edited.jpg" alt="Picture of Nick">
 
-            </p>
-            <div class="div_link_to_rest">
-              <a href="{{ url_for('main.more_about_me') }}"> more ...</a>
+                I am an <a href="https://www.whatisanindiemaker.com/">indie maker</a>.
+
+
+                
+
+                <div class="bio_paragraph">
+                  I love to build things and help people.
+                  <span class="link_to_rest_small">
+                    <a  href="{{ url_for('main.more_about_me') }}"> more...</a>
+                  </span>
+                </div>
+
+
+              </div>
+
+              
+
             </div>
-
+            <div class="div_link_to_rest">
+              <a href="{{ url_for('main.more_about_me') }}"> more...</a>
+            </div>
           </div>
 
         </div>
 
+        <!-- </div> -->
+
 
 
         <div class="std_framing ws_div">
-          What Sticks (WS) is an application that helps navigate your wellness with data already being collected by your
-          other applications and devices.
-          <a href="https://what-sticks.com">
-            <img class="ws_logo_small" src="../static/images/wshLogo_300px_doodle02.png">
+          <div class="center_me_2">
+            What Sticks (WS) is an application that helps navigate your wellness with data already being collected by
+            your
+            other applications and devices.
+            <a href="https://what-sticks.com">
+              <img class="ws_logo_small" src="../static/images/wshLogo_300px_doodle02.png">
 
-          </a>
+            </a>
 
-          <br>
-          The primary driver for building What Sticks is a desire to leverage data that I know already exists to build
-          meaningful and personalized wellness benchmarks. I believe that with a little bit of navigating our everyday
-          applications and devices can start working to provide us insights that really move the needle and improve our
-          lives.
 
+            <div class="ws_paragraph">
+              WS comes from a desire to leverage data that already exists in order to better
+              understand our tendencies. I believe that WS can enhance our everyday applications and
+              devices so they provide us with insights that really move the needle and improve our
+              lives.
+            </div>
+
+
+          </div>
         </div>
       </div>
 
@@ -98,14 +131,21 @@
                 {% if post.social_name == "Github" %}
 
                 <span class="span_dark">Repoository Name: </span>{{ post.title }}
-                {% else %}
-                {{ post.title }}
-                {% endif %}
-
-                {% if post.description != None %}
                 <br>
                 <small>{{ post.description }}</small>
+
+                {% elif post.social_name == "Goodreads" %}
+
+                Just finished reading: <br>{{ post.title }}
+                <br>
+                <small>by {{ post.description }}</small>
+
+                {% else %}
+
+                {{ post.title }}
+
                 {% endif %}
+
 
               </div>
 
@@ -124,15 +164,16 @@
 
         {% endfor %}
         <div class="div_link_to_rest">
-          <a href="{{ url_for('main.rest_of_posts', pagination_position=1) }}"> See more here ...</a>
+          <a href="{{ url_for('main.rest_of_posts', pagination_position=1, size_of_lists_for_pagination=10) }}"> See
+            more here ...</a>
         </div>
 
       </div>
 
       <div class="std_framing handles_div">
-        <div class="handles_div_title">
+        <!-- <div class="handles_div_title">
           You can find me
-        </div>
+        </div> -->
 
         <br>
 
@@ -162,10 +203,12 @@
 
         <!-- <br> -->
         <div class="handle_std">
-          Email: nick@dashanddata.com
+          Email: nrodrig1@gmail.com
         </div>
 
-
+        <div class="handle_std">
+          <a href="{{ url_for('main.more_about_me', _anchor='resume') }}">Resume/CV</a>
+        </div>
 
       </div>
 

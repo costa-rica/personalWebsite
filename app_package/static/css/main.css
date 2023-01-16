@@ -10783,6 +10783,7 @@ textarea.form-control-lg {
   --social_icon_img_height: 5vh;
   --nick_page_theme_font_color: --bs-gray-900;
   --std_framing_border_color: rgba(233, 84, 32, .6);
+  --normal_font_size: 1.25rem;
 }
 
 body {
@@ -10797,6 +10798,7 @@ body {
   background-color: var(--bs-gray-500);
   padding: 1rem;
   color: var(--nick_page_theme_font_color);
+  font-size: var(--normal_font_size);
 }
 
 .main {
@@ -10813,40 +10815,70 @@ body {
 .home_page .image_div_lg {
   display: none;
 }
+.home_page .hide_small {
+  display: none;
+}
 .home_page .bio_and_ws {
   display: grid;
   gap: 1rem;
+  height: 100%;
+  /* link to rest working well before */
 }
-.home_page .bio_and_ws .center_me {
+.home_page .bio_and_ws .page_title {
+  padding: 1rem 0 0 3rem;
   display: flex;
-  flex-wrap: wrap;
-  flex-flow: column;
+  justify-content: center;
+}
+.home_page .bio_and_ws .page_title h1 {
+  font-size: 4rem;
+}
+.home_page .bio_and_ws .bio_div_sub {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+.home_page .bio_and_ws .bio_div_sub_non_title {
+  display: flex;
+  justify-content: space-between;
   align-items: center;
   width: 100%;
-  height: 100%;
+}
+.home_page .bio_and_ws .bio_div_sub_non_title .bio_words {
+  padding-left: 1rem;
+}
+.home_page .bio_and_ws .bio_div_sub_non_title .bio_words .bio_paragraph {
+  padding-top: 0.5rem;
+}
+.home_page .bio_and_ws .bio_div_sub_non_title .bio_words .bio_paragraph .link_to_rest_small a {
+  padding-left: 0.3rem;
+  text-decoration: none;
+  color: var(--bs-orange);
+  font-size: 1.25rem;
+}
+.home_page .bio_and_ws .bio_div_sub_non_title .bio_words .bio_paragraph .link_to_rest_small a:hover {
+  font-size: 1.5rem;
+  color: white;
 }
 .home_page .bio_and_ws .image_me_small {
   height: 8rem;
   border-radius: 3rem;
   float: left;
-  margin: 5px;
-}
-.home_page .bio_and_ws p {
-  text-align: justify;
+  margin: 0 5px 0 -10px;
 }
 .home_page .bio_and_ws .div_link_to_rest {
+  display: none;
+}
+.home_page .bio_and_ws .ws_div {
   display: flex;
-  justify-content: end;
-  font-size: 1.9vh;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
 }
-.home_page .bio_and_ws .div_link_to_rest a {
-  padding-left: 0.3rem;
-  text-decoration: none;
-  color: black;
+.home_page .bio_and_ws .ws_div .center_me_2 {
+  padding-left: 1rem;
 }
-.home_page .bio_and_ws .div_link_to_rest a:hover {
-  border: 0.5rem solid var(--bs-orange);
-  border-radius: 1.75rem;
+.home_page .bio_and_ws .ws_div .center_me_2 .ws_paragraph {
+  padding-top: 0.5rem;
 }
 .home_page .ws_logo_small {
   height: 8rem;
@@ -10860,7 +10892,7 @@ body {
   padding: 2rem 1rem;
 }
 .home_page .recent_posts .recent_posts_title {
-  font-size: 1.9vh;
+  font-size: 1.1rem;
 }
 .home_page .recent_posts a {
   text-decoration: none;
@@ -10884,6 +10916,10 @@ body {
   border-radius: 1rem;
   padding: 1rem;
   color: var(--nick_page_theme_font_color);
+}
+.home_page .recent_posts .standard_social .img_social_icon {
+  display: flex;
+  align-items: center;
 }
 .home_page .recent_posts .standard_social .img_social_icon img {
   height: var(--social_icon_img_height);
@@ -10934,38 +10970,44 @@ body {
   align-items: center;
   justify-content: center;
   width: 100%;
+  font-size: 1rem;
 }
 .home_page .recent_posts .bubble_count .img_social_icon {
-  margin-top: -0.75rem;
-  padding-right: 1rem;
+  display: flex;
+  align-items: center;
 }
 .home_page .recent_posts .bubble_count .img_social_icon img {
-  height: 2vh;
+  height: 2.5vh;
 }
 .home_page .recent_posts .div_link_to_rest {
   display: flex;
   justify-content: end;
-  font-size: 1.9vh;
+  font-size: var(--normal_font_size);
 }
 .home_page .recent_posts .div_link_to_rest a {
   padding-left: 0.3rem;
+  color: var(--bs-orange);
+  font-size: var(--normal_font_size);
+}
+.home_page .recent_posts .div_link_to_rest a:hover {
+  font-size: 1.5rem;
+  color: white;
+  border: none;
 }
 .home_page .handles_div {
   display: flex;
   flex-wrap: wrap;
   background-color: var(--bs-gray-500);
 }
-.home_page .handles_div .handles_div_title {
-  width: 100%;
-  font-size: 1.9vh;
-  padding-bottom: 0.5rem;
-}
 .home_page .handles_div .handle_std {
-  font-size: 1.9vh;
+  font-size: var(--normal_font_size);
   width: 100%;
   padding-left: 1rem;
 }
 
+.rest_of_posts .div_link_to_home {
+  padding: 0 0 1rem 1rem;
+}
 .rest_of_posts .ws_logo_small {
   height: 8rem;
   float: right;
@@ -10976,9 +11018,6 @@ body {
   border-radius: 3rem;
   background-color: var(--bs-gray-500);
   padding: 2rem 1rem;
-}
-.rest_of_posts .recent_posts .recent_posts_title {
-  font-size: 1.9vh;
 }
 .rest_of_posts .recent_posts a {
   text-decoration: none;
@@ -11062,6 +11101,45 @@ body {
   justify-content: end;
 }
 
+.more_about_me .div_link_to_home {
+  padding: 0 0 1rem 1rem;
+}
+.more_about_me a:hover {
+  font-size: 1.5rem;
+  color: var(--bs-gray-100);
+}
+.more_about_me .my_bio_div {
+  display: grid;
+  gap: 1rem;
+  border-radius: 3rem;
+  background-color: var(--bs-gray-500);
+  padding: 2rem 1rem;
+}
+.more_about_me .my_bio_div .bio_paragraph {
+  padding-top: 0.5rem;
+}
+.more_about_me .my_bio_div a {
+  padding-left: 0.3rem;
+  text-decoration: none;
+  color: var(--bs-orange);
+  font-size: 1.25rem;
+}
+.more_about_me .my_bio_div a:hover {
+  font-size: 1.5rem;
+  color: white;
+}
+
+@media only screen and (min-width: 300px) {
+  .home_page .recent_posts .recent_posts_title {
+    font-size: var(--normal_font_size);
+  }
+  .home_page .recent_posts .bubble_count .bubble_title {
+    font-size: var(--normal_font_size);
+  }
+  .home_page .recent_posts .bubble_count .img_social_icon img {
+    height: 3vh;
+  }
+}
 @media only screen and (min-width: 992px) {
   .home_page .grid-col-span-2 {
     grid-column: span 2;
@@ -11070,6 +11148,12 @@ body {
     display: grid;
     gap: 1rem;
     grid-template-columns: repeat(3, 1fr);
+  }
+  .home_page .bio_and_ws .page_title h1 {
+    font-size: 5rem;
+  }
+  .home_page .hide_small {
+    display: block;
   }
   .home_page .image_me_small {
     display: none;
@@ -11083,9 +11167,6 @@ body {
     height: 100%;
     border-radius: 3rem;
   }
-  .home_page .handles_div .handle_std {
-    padding-left: 0;
-  }
   .home_page .recent_posts a {
     text-decoration: none;
     /* no underline */
@@ -11094,6 +11175,13 @@ body {
   .home_page .recent_posts a:hover {
     border: 0.5rem solid var(--bs-orange);
     border-radius: 1.75rem;
+  }
+  .home_page .handles_div {
+    padding: 2rem 0 0 1rem;
+  }
+  .home_page .handles_div .handle_std {
+    padding: 0 0 0 1rem;
+    font-size: 1.5rem;
   }
 }
 

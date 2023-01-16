@@ -1,26 +1,76 @@
 {% extends "_layout.html" %}
 {% block main %}
 
+
 <div class="main">
-  <div class="rest_of_posts">
+  <div class="more_about_me">
+
     <div class="page_name">
       <h1>More About Me</h1>
     </div>
+
     <div class="div_link_to_home">
       <a href="{{ url_for('main.home') }}"> Back home ...</a>
     </div>
 
 
 
-      <div class="recent_posts">
+    <div class="my_bio_div std_framing">
 
-        For most of my training I was leaning on models with small datasets that tried to be very precise. But as technology has improved and datasets have gotten larger, I’ve found myself more convinced by simpler models that use large datasets. The trends shared over larger sets of data just seem to be more convincing and enough to say “ok, this might not be the whole story, but its enough of the story to start doing things this way”. 
+      <div class="bio_paragraph">
+        I am passionate about many things but at the core I believe in pursing personal growth and finding a way to help
+        others.
       </div>
-      
+      <div class="bio_paragraph">
+
+        While I enjoy coding and technology, I see them as a tools to connect with the world in a way that speaks
+        to me - building for others.
+      </div>
+      <div class="bio_paragraph">
+        I also love my family, being a father, sports, playing guitar, meeting new people, and lists.
+      </div>
+
+      <div class="bio_paragraph">
+        Concepts that shape my life:
+        <ul>
+          <li>Ikigai</li>
+          <li><a href="https://youtu.be/ZzaUGhhnlQ8">Wu Wei</a></li>
+          <li>“Life can’t be just about solving problems. There has to be something that inspires.”</li>
+        </ul>
+
+      </div>
+
+      <div class="articles">
+
+        Here are some articles I've written that say a lot about me
+        <br />
+        <ul>
+          <li><a href="https://medium.com/@nrodrig1/90-percent-positivity-10-percent-realism-43c237afe13b"> 90 Percent
+              Positivity 10 Percent Realism</a></li>
+          <li><a href="https://medium.com/@nrodrig1/the-best-pick-up-line-b5051ef666a7"> The Best Pick Up Line</a></li>
+          <li><a href="https://medium.com/@nrodrig1/a-hard-look-at-myself-a3a22f72519e">A Hard Look at Myself</a></li>
+          <li><a href="https://medium.com/@nrodrig1/healthcare-is-not-up-to-date-2e58c01c1477">Healthcare is Not
+              Up-To-Date</a></li>
+        </ul>
+      </div>
+
+
+
 
     </div>
-  </div>
-  
+    <br/>
 
-  
-  {% endblock %}
+    <div class="my_bio_div std_framing" id="resume">
+      Resume (coming soon)
+
+
+      <!-- <iframe src="https://onedrive.live.com/embed?cid=60DF6D5FEED7AC60&resid=60DF6D5FEED7AC60%21427385&authkey=AO88z_jEs7Ytcho&em=2" width="100%" height="1000px" frameborder="0" scrolling="no"></iframe> -->
+ 
+    </div>
+
+
+  </div>
+</div>
+<div id="includedContent"></div>
+
+{% endblock %}

@@ -121,8 +121,9 @@ def rest_of_posts():
     # social_posts = sess.query(SocialPosts).order_by(desc(SocialPosts.post_date)).all()
     
     # Create List of lists
+    
+    size_of_lists_for_pagination = int(request.args.get('size_of_lists_for_pagination'))
 
-    size_of_lists_for_pagination = 10
     counter = 0
     page_list = []
     social_posts_list = []
@@ -142,9 +143,17 @@ def rest_of_posts():
 
         social_posts_list.append(temp_post_dict)
 
-        if counter % size_of_lists_for_pagination == 0 and counter > 0:
+        try:
+            social_posts_list_of_dicts[counter + 1]# check if there is one more post
+            if counter % size_of_lists_for_pagination == 0 and counter > 0:
+                page_list.append(social_posts_list)
+                social_posts_list = []
+        except IndexError:# <--- triggers when on the last post only. So just add this to list.
             page_list.append(social_posts_list)
             social_posts_list = []
+        except ZeroDivisionError:# <--- triggers when user wants to see all posts in one page.
+            page_list.append(social_posts_list)
+            # social_posts_list = []
         counter += 1
 
 
@@ -173,12 +182,12 @@ def rest_of_posts():
     pagination_dict = {'first':1, 'previous':page_previous, 'current':pagination_position, 'next': page_next, 'last_page': number_of_pages }
     print('- pagination_dict -')
     print(pagination_dict)
-    if request.method == 'POST':
-        formDict = request.forms.to_dict()
-        print('formDict: ', formDict)
+    # if request.method == 'POST':
+    #     formDict = request.forms.to_dict()
+    #     print('formDict: ', formDict)
 
     return render_template('rest_of_posts.html', display_post = page_list_displayed, number_of_pages = number_of_pages,
-        pagination_dict = pagination_dict)
+        pagination_dict = pagination_dict, size_of_lists_for_pagination = size_of_lists_for_pagination)
 
 
 
@@ -212,7 +221,13 @@ def collect_new_activity():
 
         # put new post data into df_new_data
         df_new_data = pd.DataFrame(request_data.get('new_activity'))
+        if len(df_new_data) == 0:
+            logger_main.info(f'--- No new data from social aggregator call ---')
+            return jsonify({"message": "successfully added new social activity"})
 
+        else:
+            logger_main.info(f"--- {len(df_new_data)} new items sent from social aggregator ---")
+            
         print('-- df_new_data --')
         print('Length of new data: ', len(df_new_data))
         print(df_new_data.head())
