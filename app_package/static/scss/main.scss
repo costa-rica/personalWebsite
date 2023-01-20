@@ -1,4 +1,5 @@
 @use "custom";
+@use "resume";
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;700&display=swap');
 
 
@@ -528,8 +529,8 @@ body {
   }
 }
 
-//For Screen wider than 992 (lg)
-@media only screen and (min-width: 300px) {
+//For Screen wider than 330px
+@media only screen and (min-width: 330px) {
   .home_page {
     .recent_posts {
       .recent_posts_title {

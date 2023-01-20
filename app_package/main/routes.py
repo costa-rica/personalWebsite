@@ -42,7 +42,6 @@ logger_main.addHandler(stream_handler)
 @main.route("/", methods=["GET","POST"])
 def home():
     logger_main.info(f"- in home page: / ")
-    # social_posts = sess.query(SocialPosts).order_by(desc(SocialPosts.post_date)).all()
     
     social_posts_df = pd.read_pickle(os.path.join(current_app.config.get('PROJ_DB_PATH'), current_app.config.get('SOCIAL_DF_FILE_NAME')))
     social_posts_df['post_date_to_datetime'] = pd.to_datetime(social_posts_df['post_date'])
@@ -64,7 +63,6 @@ def home():
 
         social_posts_list.append(temp_post_dict)
 
-    # social_posts_list_2 = [social_posts_list[0]] + [social_posts_list[13]] + [social_posts_list[14]]
     display_post = []
     counter = 0
     for post in social_posts_list:
@@ -93,7 +91,7 @@ def home():
             # append dict item with social_name and icon of previous social add count
             temp_post_dict['social_name'] = social_name
             temp_post_dict['social_icon'] = social_icon
-            temp_post_dict['counter'] = counter
+            temp_post_dict['counter'] = counter - 1
             display_post.append(temp_post_dict)
 
             # get next post
@@ -101,12 +99,6 @@ def home():
             break
 
 
-
-    # div_class = "Twitter"
-    # print('--- display_post ---')
-    # print("length: ", len(display_post))
-    # print(display_post)
-    # return render_template('home.html', display_post = display_post, div_class=div_class)
     return render_template('home.html', display_post = display_post)
 
 
@@ -191,7 +183,6 @@ def rest_of_posts():
 
 
 
-
 @main.route('/more_about_me')
 def more_about_me():
     return render_template('more_about_me.html')
@@ -199,28 +190,29 @@ def more_about_me():
 
 @main.route('/collect_new_activity', methods=['GET','POST'])
 def collect_new_activity():
-    print('------------------------------------------')
-    print('- recieved call to collect_new_activity - ')
-    # print('PASSword: ', current_app.config.get('DESTINATION_PASSWORD'))
+    logger_main.info(f'--- collect_new_activity endpoint accessed ---')
     
     request_data = request.get_json()
-    print(dir(request))
     request_headers = request.headers
-    print('request headers Password : ', request_headers.get('password'))
-    print('request headers All: ', request_headers.get('password'))
-
-
-    # print('received data: ', request_data.get('password'))
-    # print('--- All Received Data ---')
-    # print(request_data)
 
     if request_headers.get('password') == current_app.config.get('DESTINATION_PASSWORD'):
         logger_main.info(f'--- collect_new_activity endpoint PASSWORD verified ---')
             
-        print(len(request_data.get('new_activity')))
+        # print(len(request_data.get('new_activity')))
+        logger_main.info(f"new_activty is of tyep: {type(request_data.get('new_activity'))}")
+        logger_main.info(request_data.get('new_activity'))
 
         # put new post data into df_new_data
-        df_new_data = pd.DataFrame(request_data.get('new_activity'))
+        # df_new_data = pd.DataFrame(json.loads(request_data.get('new_activity')))
+        if isinstance(request_data.get('new_activity'),list):
+            df_new_data = pd.DataFrame(request_data.get('new_activity'))
+            logger_main.info(f"--- data sent is list ---")
+        else:
+            logger_main.info(f"--- data sent is NOT list - should be dict ---")
+            df_new_data = pd.DataFrame([request_data.get('new_activity')])
+
+
+        # logger_main.info(df_new_data.head())
         if len(df_new_data) == 0:
             logger_main.info(f'--- No new data from social aggregator call ---')
             return jsonify({"message": "successfully added new social activity"})
@@ -228,30 +220,15 @@ def collect_new_activity():
         else:
             logger_main.info(f"--- {len(df_new_data)} new items sent from social aggregator ---")
             
-        print('-- df_new_data --')
-        print('Length of new data: ', len(df_new_data))
-        print(df_new_data.head())
-
-        # get existing web data from df_existing
-
-        # df_to_add removes any already existing form df_new_data
-
-        # concat df_to_add to df_existing
-
-        #df_existing.to_pickle
-
-
 
         if os.path.exists(os.path.join(current_app.config.get('PROJ_DB_PATH'),current_app.config.get('SOCIAL_DF_FILE_NAME'))):
-            # df_from_db = get_db_social_activity()
             df_existing = pd.read_pickle(os.path.join(current_app.config.get('PROJ_DB_PATH'),current_app.config.get('SOCIAL_DF_FILE_NAME')))
+            
             ### make unique index from network_post_id, social_name, title
             df_new_data.set_index(['network_post_id', 'social_name','title'], inplace=True)
             df_existing.set_index(['network_post_id', 'social_name','title'], inplace=True)
 
             df_to_add = df_new_data[~df_new_data.index.isin(df_existing.index)]
-
-            print('Length of df_to_add: ', len(df_to_add))
 
             #Append to df_exisitng
             df_mirror = pd.concat([df_existing, df_to_add]).reset_index()
@@ -259,15 +236,9 @@ def collect_new_activity():
             df_mirror.to_pickle(os.path.join(current_app.config.get('PROJ_DB_PATH'),current_app.config.get('SOCIAL_DF_FILE_NAME')))
         
         else:# - All data is new
-            # df_to_add = get_db_social_activity()
             df_new_data.to_pickle(os.path.join(current_app.config.get('PROJ_DB_PATH'),current_app.config.get('SOCIAL_DF_FILE_NAME')))
-
-
-
-
 
         return jsonify({"message": "successfully added new social activity"})
     else:
         logger_main.info(f'- password NOT verified -')
         return make_response('Could not verify',401)
-
