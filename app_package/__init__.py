@@ -62,7 +62,9 @@ def create_app(config_class=config):
     app.config.from_object(config_class)
     
     from app_package.main.routes import main
+    from app_package.main_api.routes import main_api
 
     app.register_blueprint(main)
+    app.register_blueprint(main_api)
 
     return app

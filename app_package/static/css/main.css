@@ -10955,6 +10955,60 @@ textarea.form-control-lg {
   width: 12.3%;
 }
 
+.WordSection1 {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+}
+.WordSection1 h1 {
+  width: 100%;
+}
+.WordSection1 a#pdf {
+  display: block;
+  float: left;
+  background: #666;
+  color: white;
+  padding: 6px 50px 6px 12px;
+  margin-bottom: 6px;
+  text-decoration: none;
+}
+.WordSection1 a#pdf:hover {
+  background: #222;
+}
+
+.dossier_sub {
+  width: 90%;
+}
+.dossier_sub img {
+  min-width: 20rem;
+}
+
+.TableGrid tr .td_left {
+  width: 50%;
+  border: solid black 1pt;
+  padding: 1.2pt 5.75pt 1.35pt 5.5pt;
+  height: 1pt;
+}
+.TableGrid tr .td_right {
+  width: 50%;
+  border: solid black 1pt;
+  border-left: none;
+  padding: 1.2pt 5.75pt 1.35pt 5.5pt;
+  height: 1pt;
+}
+
+@media only screen and (min-width: 330px) {
+  .dossier_sub {
+    max-width: 50rem;
+  }
+  .dossier_sub .TableGrid {
+    width: 100%;
+  }
+  .dossier_sub img {
+    min-width: 20rem;
+  }
+}
 :root {
   --social_icon_img_height: 5vh;
   --nick_page_theme_font_color: --bs-gray-900;

@@ -1,13 +1,11 @@
 from flask import Blueprint
 from flask import render_template, url_for, redirect, flash, request, current_app, jsonify, \
-    make_response
+    make_response, send_from_directory
 import os
-# from app_package.models import SocialPosts, sess
-# from sc_models import SocialPosts, sess
-# from sqlalchemy import desc
 import logging
 from logging.handlers import RotatingFileHandler
 import pandas as pd
+import shutil
 
 
 main = Blueprint('main', __name__)
@@ -188,57 +186,30 @@ def more_about_me():
     return render_template('more_about_me.html')
 
 
-@main.route('/collect_new_activity', methods=['GET','POST'])
-def collect_new_activity():
-    logger_main.info(f'--- collect_new_activity endpoint accessed ---')
-    
-    request_data = request.get_json()
-    request_headers = request.headers
+@main.route('/dossier')
+def dossier_location():
 
-    if request_headers.get('password') == current_app.config.get('DESTINATION_PASSWORD'):
-        logger_main.info(f'--- collect_new_activity endpoint PASSWORD verified ---')
-            
-        # print(len(request_data.get('new_activity')))
-        logger_main.info(f"new_activty is of tyep: {type(request_data.get('new_activity'))}")
-        logger_main.info(request_data.get('new_activity'))
+    #get path to database/images
+    # path_to_images = os.path.join(current_app.config.get('PROJ_DB_PATH'),'images/')
+    sourcePath = os.path.join(current_app.config.get('PROJ_DB_PATH'),'images/')
+    destinationPath = os.path.join(current_app.static_folder,"images","dossier")
 
-        # put new post data into df_new_data
-        # df_new_data = pd.DataFrame(json.loads(request_data.get('new_activity')))
-        if isinstance(request_data.get('new_activity'),list):
-            df_new_data = pd.DataFrame(request_data.get('new_activity'))
-            logger_main.info(f"--- data sent is list ---")
-        else:
-            logger_main.info(f"--- data sent is NOT list - should be dict ---")
-            df_new_data = pd.DataFrame([request_data.get('new_activity')])
+    if not os.path.exists(destinationPath):
+        #copy images to static/images/dossier
+        shutil.copytree(sourcePath, destinationPath)
+
+    # print("- Destintation of copy: ", dest_of_copy)
+    picture = os.path.join(destinationPath, "NickAndMolly2022.jpg")
+    print("Picture path:")
+    print(picture)
 
 
-        # logger_main.info(df_new_data.head())
-        if len(df_new_data) == 0:
-            logger_main.info(f'--- No new data from social aggregator call ---')
-            return jsonify({"message": "successfully added new social activity"})
+    return render_template('dossier_location.html', path_to_images=picture)
 
-        else:
-            logger_main.info(f"--- {len(df_new_data)} new items sent from social aggregator ---")
-            
 
-        if os.path.exists(os.path.join(current_app.config.get('PROJ_DB_PATH'),current_app.config.get('SOCIAL_DF_FILE_NAME'))):
-            df_existing = pd.read_pickle(os.path.join(current_app.config.get('PROJ_DB_PATH'),current_app.config.get('SOCIAL_DF_FILE_NAME')))
-            
-            ### make unique index from network_post_id, social_name, title
-            df_new_data.set_index(['network_post_id', 'social_name','title'], inplace=True)
-            df_existing.set_index(['network_post_id', 'social_name','title'], inplace=True)
-
-            df_to_add = df_new_data[~df_new_data.index.isin(df_existing.index)]
-
-            #Append to df_exisitng
-            df_mirror = pd.concat([df_existing, df_to_add]).reset_index()
-            #df_existing to pickle
-            df_mirror.to_pickle(os.path.join(current_app.config.get('PROJ_DB_PATH'),current_app.config.get('SOCIAL_DF_FILE_NAME')))
-        
-        else:# - All data is new
-            df_new_data.to_pickle(os.path.join(current_app.config.get('PROJ_DB_PATH'),current_app.config.get('SOCIAL_DF_FILE_NAME')))
-
-        return jsonify({"message": "successfully added new social activity"})
-    else:
-        logger_main.info(f'- password NOT verified -')
-        return make_response('Could not verify',401)
+@main.route('/telecharger', methods=['GET','POST'])
+def telecharger_dossier():
+    # path_to_images = os.path.join(current_app.config.get('PROJ_DB_PATH'),'images')
+    destinationPath = os.path.join(current_app.static_folder,"images","dossier")
+    # return render_template('dossier_location.html', path_to_images=path_to_images+"/NickAndMolly2022.jpg")
+    return send_from_directory(directory=destinationPath, path="nick_rodriguez_dossier.pdf")

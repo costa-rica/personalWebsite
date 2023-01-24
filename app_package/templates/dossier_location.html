@@ -1,0 +1,214 @@
+{% extends "_layout.html" %}
+{% block main %}
+
+<div class="main">
+  <div class="dossier">
+
+
+    <!-- <section class="home"> -->
+
+    <!-- <img src="{{ url_for('static', filename='images/dossier/NickAndMolly2022.jpg') }}"> -->
+
+
+    <div class=WordSection1>
+
+
+
+      <div class="dossier_sub">
+
+
+        <h1>Nick Rodriguez Dossier </h1>
+        <br>
+  
+        <h3><a id="pdf" href="{{ url_for('main.telecharger_dossier') }}">Télécharger PDF</a></h3>
+
+        <table class=TableGrid 
+          >
+          <tr>
+            <td class="td_left">
+              <p class=MsoNormal style='margin:0cm;text-indent:0cm;line-height:107%'><b><span
+                    style='font-size:11.0pt;line-height:107%'>Prenom et nom: </span></b> </p>
+            </td>
+            <td class="td_right">
+              <p class=MsoNormal style='margin:0cm;text-indent:0cm;line-height:107%'><span
+                  style='font-size:11.0pt;line-height:107%'> Nicholas (Nick) Rodriguez </span> </p>
+            </td>
+          </tr>
+          <tr>
+            <td class="td_left">
+              <p class=MsoNormal style='margin:0cm;text-indent:0cm;line-height:107%'><b><span
+                    style='font-size:11.0pt;line-height:107%'>Portable: </span></b> </p>
+            </td>
+            <td class="td_right">
+              <p class=MsoNormal style='margin:0cm;text-indent:0cm;line-height:107%'><span
+                  style='font-size:11.0pt;line-height:107%'> +33 07 66 68 03 09 </span> </p>
+            </td>
+          </tr>
+          <tr style='height:1.0pt'>
+            <td class="td_left">
+              <p class=MsoNormal style='margin:0cm;text-indent:0cm;line-height:107%'><b><span
+                    style='font-size:11.0pt;line-height:107%'>E-Mail </span></b> </p>
+            </td>
+            <td class="td_right">
+              <p class=MsoNormal style='margin:0cm;text-indent:0cm;line-height:107%'><u><span
+                    style='font-size:11.0pt;line-height:107%;color:#0463C1'>nickapeed@yahoo.com</span></u><span
+                  style='font-size:1.0pt;line-height:107%'> </span> </p>
+            </td>
+          </tr>
+          <tr style='height:1.0pt'>
+            <td class="td_left">
+              <p class=MsoNormal style='margin:0cm;text-indent:0cm;line-height:107%'><b><span
+                    style='font-size:11.0pt;line-height:107%'>CV: </span></b> </p>
+            </td>
+            <td class="td_right">
+              <p class=MsoNormal style='margin:0cm;text-indent:0cm;line-height:107%'><u><span
+                    style='font-size:11.0pt;line-height:107%;color:#0463C1'>https://dashanddata.com/about_me</span></u><span
+                  style='font-size:1.0pt;line-height:107%;color:#0463C1'> </span> </p>
+            </td>
+          </tr>
+          <tr style='height:1.0pt'>
+            <td class="td_left">
+              <p class=MsoNormal style='margin:0cm;text-indent:0cm;line-height:107%'><b><span
+                    style='font-size:11.0pt;line-height:107%'>Appartement Actual: </span></b> </p>
+            </td>
+            <td class="td_right">
+              <p class=MsoNormal style='margin:0cm;text-indent:0cm;line-height:107%'><span
+                  style='font-size:11.0pt;line-height:107%'> 22 Rue Greneta 75002 </span> </p>
+            </td>
+          </tr>
+          <tr style='height:1.0pt'>
+            <td class="td_left">
+              <p class=MsoNormal style='margin:0cm;text-indent:0cm;line-height:107%'><b><span
+                    style='font-size:11.0pt;line-height:107%'>Louer (Actual): </span></b> </p>
+            </td>
+            <td class="td_right">
+              <p class=MsoNormal style='margin:0cm;text-indent:0cm;line-height:107%'><span
+                  style='font-size:11.0pt;line-height:107%'> 1 400</span><span lang=EN-US
+                  style='font-size:11.0pt;line-height:107%'>€</span><span style='font-size:
+          11.0pt;line-height:107%'> *</span> </p>
+            </td>
+          </tr>
+          <tr style='height:1.0pt'>
+            <td class="td_left">
+              <p class=MsoNormal style='margin:0cm;text-indent:0cm;line-height:107%'><b><span
+                    style='font-size:11.0pt;line-height:107%'>Commence: </span></b> </p>
+            </td>
+            <td class="td_right">
+              <p class=MsoNormal style='margin:0cm;text-indent:0cm;line-height:107%'><span
+                  style='font-size:11.0pt;line-height:107%'> 25 Mars 2022 </span> </p>
+            </td>
+          </tr>
+          <tr style='height:1.0pt'>
+            <td class="td_left">
+              <p class=MsoNormal style='margin:0cm;text-indent:0cm;line-height:107%'><b><span
+                    style='font-size:11.0pt;line-height:107%'>Profession: </span></b> </p>
+            </td>
+            <td class="td_right">
+              <p class=MsoNormal style='margin:0cm;text-indent:0cm;line-height:107%'><span
+                  style='font-size:11.0pt;line-height:107%'> Programmeur Independent </span> </p>
+            </td>
+          </tr>
+          <tr style='height:1.0pt'>
+            <td class="td_left">
+              <p class=MsoNormal style='margin:0cm;text-indent:0cm;line-height:107%'><b><span lang=EN-US
+                    style='font-size:11.0pt;line-height:107%'>Garanti </span></b><b><span
+                    style='font-size:11.0pt;line-height:107%'>loyer:</span></b></p>
+            </td>
+            <td class="td_right">
+              <p class=MsoNormal style='margin:0cm;text-indent:0cm;line-height:107%'><span lang=EN-US
+                  style='font-size:11.0pt;line-height:107%'> </span><span
+                  style='font-size:11.0pt;line-height:107%'>1</span><span style='font-size:
+          11.0pt;line-height:107%'> </span><span style='font-size:11.0pt;line-height:
+          107%'>200€ (</span><span lang=EN-US style='font-size:11.0pt;line-height:107%'>par
+                </span><span style='font-size:11.0pt;line-height:107%'>Garanteme)</span></p>
+            </td>
+          </tr>
+          <tr style='height:1.0pt'>
+            <td class="td_left">
+              <p class=MsoNormal style='margin-top:0cm;margin-right:3.8pt;margin-bottom:
+          0cm;margin-left:0cm;text-indent:0cm;line-height:107%'><b><span
+                    style='font-size:11.0pt;line-height:107%'>Solde actuel du compte bancaire
+                    N26: (compte pour payie louer) </span></b> </p>
+            </td>
+            <td class="td_right">
+              <p class=MsoNormal style='margin:0cm;text-indent:0cm;line-height:107%'><span
+                  style='font-size:11.0pt;line-height:107%'>2 460.12</span><span lang=EN-US
+                  style='font-size:11.0pt;line-height:107%'>€</span><span lang=EN-US
+                  style='font-size:11.0pt;line-height:107%'> </span><span lang=EN-US> </span></p>
+            </td>
+          </tr>
+          <tr style='height:1.0pt'>
+            <td class="td_left">
+              <p class=MsoNormal style='margin:0cm;text-indent:0cm;line-height:107%'><b><span
+                    style='font-size:11.0pt;line-height:107%'>Revenu imposable 2021 </span></b><span
+                  style='font-size:10.0pt;line-height:107%'>(avant-dernière page)</span><span
+                  style='font-size:10.0pt;line-height:107%;font-family:"Courier New"'> </span> </p>
+            </td>
+            <td class="td_right">
+              <p class=MsoNormal style='margin:0cm;text-indent:0cm;line-height:107%'><span
+                  style='font-size:11.0pt;line-height:107%'>$100 740 </span> </p>
+            </td>
+          </tr>
+          <tr style='height:1.0pt'>
+            <td class="td_left">
+              <p class=MsoNormal style='margin:0cm;text-indent:0cm;line-height:107%'><b><span
+                    style='font-size:11.0pt;line-height:107%'>Revenu imposable estimé 2022 </span></b> </p>
+            </td>
+            <td class="td_right">
+              <p class=MsoNormal style='margin:0cm;text-indent:0cm;line-height:107%'><span
+                  style='font-size:11.0pt;line-height:107%'>$54 900 </span> </p>
+            </td>
+          </tr>
+        </table>
+
+        <p class=MsoNormal style='margin-left:-.25pt'>* le mois dernier 1 250 euros
+          après renégociaon  </p>
+
+        <p class=MsoNormal style='margin-left:-.25pt'>&nbsp;</p>
+
+        <p class=MsoNormal style='margin-top:0cm;margin-right:0cm;margin-bottom:.6pt;
+        margin-left:.75pt;text-indent:0cm;line-height:107%'> <span style='font-size:
+        11.0pt;line-height:107%'><img width=25% id="Group 2068"
+              src="{{ url_for('static', filename='images/dossier/NickAndMolly2022.jpg') }}">
+
+            <img width=25% src="{{ url_for('static', filename='images/dossier/titreSejour2023clean.png') }}">
+
+          </span>  </p>
+        <br />
+        <br>
+        <p class=MsoNormal style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;
+        margin-left:-.25pt;line-height:107%'><span style='font-size:16.0pt;line-height:
+        107%;color:#2E5496'>A propos de moi </span> </p>
+
+        <p>Je suis développeur de logiciels. Je développe une application dans le domaine du bien-être. Je suis
+          passionnée par le
+          bien-être et la technologie.  </p>
+
+        <p>Auparavant, dans mon
+          dernier emploi, j'étais économiste dans les domaines de l'énergie et de la
+          défense. J'étais copropriétaire de 3 bars à succès aux États-Unis que j'ai
+          vendus depuis. Avec mon frère nous sommes propriétaires d'une maison que nous
+          louons.  Je suis fier d'être le père d'une fille qui gère sa vie de mannequin à
+          New York (photo au dessus).  </p>
+
+        <p class=MsoNormal style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;
+        margin-left:-.25pt;line-height:107%'><span style='font-size:16.0pt;line-height:
+        107%;color:#2E5496'>Pourquoi France ? </span> </p>
+
+        <p class=MsoNormal style='margin-left:-.25pt'>J'ai vécu toute ma vie à
+          Washington DC et je voulais un changement. J'adore vivre à Paris et apprendre
+          le français en construisant ceWe application. Aujourd'hui
+          je vis dans le second depuis plus d'un an. Récemment, j'ai renouvelé mon
+          titre de séjour. Mon français n'est pas mauvais et
+          s'améliore. Je veux m'assimiler ici et m'enraciner ici.  </p>
+
+
+      </div>
+
+    </div><!-- WordSection1 -->
+
+    <!-- </section> -->
+  </div><!-- dossier -->
+</div><!-- main -->
+
+{% endblock %}

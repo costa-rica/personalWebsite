@@ -1,0 +1,70 @@
+.WordSection1 {
+  // background-color: pink;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+  h1{width:100%}
+  a#pdf {
+    display: block;
+    float: left;
+    background: #666;
+    color: white;
+    padding: 6px 50px 6px 12px;
+    margin-bottom: 6px;
+    text-decoration: none;
+  }
+
+  a#pdf:hover {
+    background: #222;
+  }
+}
+
+.dossier_sub {
+  width: 90%;
+
+  img {
+    min-width: 20rem;
+  }
+
+
+
+}
+
+.TableGrid {
+  tr {
+
+    // height:1.0pt
+    .td_left {
+      width: 50%;
+      border: solid black 1.0pt;
+      padding: 1.2pt 5.75pt 1.35pt 5.5pt;
+      height: 1.0pt
+    }
+
+    .td_right {
+      // width:197.05pt;
+      width: 50%;
+      border: solid black 1.0pt;
+      border-left: none;
+      padding: 1.2pt 5.75pt 1.35pt 5.5pt;
+      height: 1.0pt
+    }
+  }
+}
+
+//For Screen wider than 330px
+@media only screen and (min-width: 330px) {
+
+.dossier_sub {
+  max-width: 50rem;
+
+  .TableGrid{width:100%;}
+  img {
+    min-width: 20rem;
+  }
+
+
+
+}
+}
