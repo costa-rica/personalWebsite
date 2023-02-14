@@ -21,20 +21,14 @@ body {
   border-width: .5em;
   border-radius: 3rem;
   background-color: var(--bs-gray-500);
-  // padding: 1rem 0 1rem 0;
   padding: 1rem;
   color: var(--nick_page_theme_font_color);
-  // width: 100%;
-  font-size: var(--normal_font_size)
+  // font-size: var(--normal_font_size)
 }
 
 .main {
   padding: 5rem 1rem 5rem 1rem;
 }
-
-// .grid-col-span-2 {
-//   grid-column: span 2;
-// }
 
 .home_page {
   .home {
@@ -57,7 +51,7 @@ body {
   .bio_and_ws {
     display: grid;
     gap: 1rem;
-    height: 100%;
+    // height: 100%;
 
     .page_title {
       padding: 1rem 0 0 3rem;
@@ -73,32 +67,20 @@ body {
     .bio_div_sub {
       display: flex;
       align-items: center;
-      // justify-content: center;
-      height: 100%;
     }
 
     .bio_div_sub_non_title {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      width: 100%;
-
 
       .bio_words {
         padding-left: 1rem;
 
-        // display:flex;
-        // // justify-content: space-between;
-        // align-items: center;
-        // flex-wrap: wrap;
         .bio_paragraph {
           padding-top: .5rem;
 
           .link_to_rest_small {
-
-            // display: flex;
-            // align-items: end;
-            // height:min-content;
             a {
               padding-left: .3rem;
               text-decoration: none;
@@ -107,8 +89,6 @@ body {
             }
 
             a:hover {
-              // border: .5rem solid var(--bs-orange);
-              // border-radius: 1.75rem;
               font-size: 1.5rem;
               color: white;
             }
@@ -121,45 +101,19 @@ body {
       height: 8rem;
       border-radius: 3rem;
       float: left;
-      // margin: 5px;
       margin: 0 5px 0 -10px;
     }
-
 
     .div_link_to_rest {
       display: none
     }
 
-    /* link to rest working well before */
-    // .div_link_to_rest {
-    //   display: flex;
-    //   justify-content: end;
-    //   align-items: end;
-    //   height:100%;
-
-
-    //   a {
-    //     padding-left: .3rem;
-    //     text-decoration: none;
-    //     color: var(--bs-orange);
-    //     font-size: 1.25rem;
-    //   }
-    //   a:hover {
-    //     // border: .5rem solid var(--bs-orange);
-    //     // border-radius: 1.75rem;
-    //     font-size: 1.5rem;
-    //     color: white;
-    //   }
-    // }
-
     .ws_div {
       display: flex;
       flex-wrap: wrap;
-      // flex-flow: column;
       align-items: center;
       justify-content: center;
 
-      // width: 100%;
       .center_me_2 {
         padding-left: 1rem;
 
@@ -190,7 +144,6 @@ body {
     }
 
     a {
-      // color: blue;
       text-decoration: none;
       /* no underline */
       color: var(--nick_page_theme_font_color);
@@ -199,14 +152,12 @@ body {
     a:hover {
 
       border: .5rem solid var(--bs-orange);
-      // border-width: 1em;
       border-radius: 1.75rem;
 
     }
 
     .posts_dict_frame {
       border-radius: 1rem;
-      // background-color: var(--bs-orange);
       border: 1px solid var(--bs-orange);
       border-width: .25em;
       padding: 1rem;
@@ -290,9 +241,6 @@ body {
       }
 
       .img_social_icon {
-        // img {height: var(--social_icon_img_height)}
-        // margin-top: -1.1rem;
-        // padding-right: 1rem;
         display: flex;
         align-items: center;
 
@@ -315,8 +263,6 @@ body {
       }
 
       a:hover {
-        // border: .5rem solid var(--bs-orange);
-        // border-radius: 1.75rem;
         font-size: 1.5rem;
         color: white;
         border: none;
@@ -326,20 +272,15 @@ body {
   }
 
   .handles_div {
-    // display:grid;
+
     display: flex;
     flex-wrap: wrap;
-    // width: 100%;
+
     background-color: var(--bs-gray-500);
 
-    // .handles_div_title {
-    //   width: 100%;
-    //   font-size: 1.9vh;
-    //   padding-bottom: .5rem;
-    // }
 
     .handle_std {
-      // font-size: 1.9vh;
+
       font-size: var(--normal_font_size);
       width: 100%;
       padding-left: 1rem;
@@ -362,45 +303,42 @@ body {
 
   .recent_posts {
     display: grid;
-    // display:flex;
+
     gap: 1rem;
     border-radius: 3rem;
     background-color: var(--bs-gray-500);
-    padding: 2rem 1rem;
-
-    // .recent_posts_title {
-    //   font-size: vaar;
-    // }
+    padding: 1rem;
 
     a {
-      // color: blue;
       text-decoration: none;
       /* no underline */
       color: var(--nick_page_theme_font_color);
+      width:95%;// Key to making the each entry to fit in screen.
     }
-
     a:hover {
 
       border: .5rem solid var(--bs-orange);
-      // border-width: 1em;
       border-radius: 1.75rem;
+      // width:1%;
+      // display:flex;
+      // justify-content: center;
+      // width:115%;
 
     }
 
-    .posts_dict_frame {
-      border-radius: 1rem;
-      // background-color: var(--bs-orange);
-      border: 1px solid var(--bs-orange);
-      border-width: .25em;
-      padding: 1rem;
-      height: 5rem;
-    }
+
+    // .posts_dict_frame {
+    //   border-radius: 1rem;
+    //   border: 1px solid var(--bs-orange);
+    //   border-width: .25em;
+    //   padding: 1rem;
+    //   height: 5rem;
+    // }
 
     .standard_social {
       display: flex;
       flex-wrap: wrap;
       border-radius: 1rem;
-      // border: .25em solid;
       padding: 1rem;
       color: var(--nick_page_theme_font_color);
 
@@ -427,6 +365,9 @@ body {
         width: 100%;
         height: 100%;
       }
+      // .standard_title{
+      //   margin:1rem;
+      // }
     }
 
     .Twitter {
@@ -499,15 +440,13 @@ body {
 
   .my_bio_div {
     display: grid;
-    // display:flex;
+
     gap: 1rem;
     border-radius: 3rem;
     background-color: var(--bs-gray-500);
     padding: 2rem 1rem;
 
-    // .recent_posts_title {
-    //   font-size: var(--normal_font_size)
-    // }
+
     .bio_paragraph {
       padding-top: .5rem;
     }
@@ -520,8 +459,6 @@ body {
     }
 
     a:hover {
-      // border: .5rem solid var(--bs-orange);
-      // border-radius: 1.75rem;
       font-size: 1.5rem;
       color: white;
     }
@@ -552,6 +489,7 @@ body {
       }
     }
   }
+
 }
 
 //For Screen wider than 992 (lg)
@@ -571,17 +509,10 @@ body {
     .bio_and_ws {
       .page_title {
 
-        // background-color: red;
-        // padding: 1rem 0 0 3rem;
-        // padding:0;
-        // font-size:1rem;
         h1 {
           font-size: 5rem;
-          // background-color: red;
         }
 
-        // display: flex;
-        // justify-content: center;
       }
     }
 
@@ -602,14 +533,12 @@ body {
     .image_me_lg {
       height: 100%;
       border-radius: 3rem;
-      // width:fit-content;
     }
 
 
 
     .recent_posts {
       a {
-        // color: blue;
         text-decoration: none;
         /* no underline */
         color: var(--nick_page_theme_font_color);
@@ -618,7 +547,6 @@ body {
       a:hover {
 
         border: .5rem solid var(--bs-orange);
-        // border-width: 1em;
         border-radius: 1.75rem;
 
       }
@@ -627,10 +555,6 @@ body {
     .handles_div {
       padding: 2rem 0 0 1rem;
 
-      // font-size: 1rem;
-      // font-size: 1.7vw;
-      // font-size: 3rem;
-      // .handles_div_title{font-size: 1.25rem;}
       .handle_std {
         padding: 0 0 0 1rem;
         font-size: 1.5rem;

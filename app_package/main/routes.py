@@ -100,6 +100,7 @@ def home():
     return render_template('home.html', display_post = display_post)
 
 
+
 @main.route('/rest_of_posts', methods=['GET','POST'])
 def rest_of_posts():
 

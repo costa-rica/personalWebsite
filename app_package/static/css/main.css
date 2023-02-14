@@ -11028,7 +11028,6 @@ body {
   background-color: var(--bs-gray-500);
   padding: 1rem;
   color: var(--nick_page_theme_font_color);
-  font-size: var(--normal_font_size);
 }
 
 .main {
@@ -11051,8 +11050,6 @@ body {
 .home_page .bio_and_ws {
   display: grid;
   gap: 1rem;
-  height: 100%;
-  /* link to rest working well before */
 }
 .home_page .bio_and_ws .page_title {
   padding: 1rem 0 0 3rem;
@@ -11065,13 +11062,11 @@ body {
 .home_page .bio_and_ws .bio_div_sub {
   display: flex;
   align-items: center;
-  height: 100%;
 }
 .home_page .bio_and_ws .bio_div_sub_non_title {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 100%;
 }
 .home_page .bio_and_ws .bio_div_sub_non_title .bio_words {
   padding-left: 1rem;
@@ -11247,23 +11242,17 @@ body {
   gap: 1rem;
   border-radius: 3rem;
   background-color: var(--bs-gray-500);
-  padding: 2rem 1rem;
+  padding: 1rem;
 }
 .rest_of_posts .recent_posts a {
   text-decoration: none;
   /* no underline */
   color: var(--nick_page_theme_font_color);
+  width: 95%;
 }
 .rest_of_posts .recent_posts a:hover {
   border: 0.5rem solid var(--bs-orange);
   border-radius: 1.75rem;
-}
-.rest_of_posts .recent_posts .posts_dict_frame {
-  border-radius: 1rem;
-  border: 1px solid var(--bs-orange);
-  border-width: 0.25em;
-  padding: 1rem;
-  height: 5rem;
 }
 .rest_of_posts .recent_posts .standard_social {
   display: flex;

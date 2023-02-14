@@ -66,9 +66,13 @@ def collect_new_activity():
     request_data = request.get_json()
     request_headers = request.headers
 
+    print(request_data.get('new_activity'))
+    print(type(request_data.get('new_activity')))
+
     if request_headers.get('password') == current_app.config.get('DESTINATION_PASSWORD'):
         logger_main_api.info(f'--- collect_new_activity endpoint PASSWORD verified ---')
             
+        # if request_data.get('new_activity')
         # print(len(request_data.get('new_activity')))
         logger_main_api.info(f"new_activty is of tyep: {type(request_data.get('new_activity'))}")
         logger_main_api.info(request_data.get('new_activity'))
