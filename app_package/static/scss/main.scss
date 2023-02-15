@@ -53,6 +53,19 @@ body {
     gap: 1rem;
     // height: 100%;
 
+
+    a {
+      padding-left: .3rem;
+      text-decoration: none;
+      color: var(--bs-orange);
+      // font-size: 1.25rem;
+    }
+
+    a:hover {
+      font-size: 1.25rem;
+      color: white;
+    }
+
     .page_title {
       padding: 1rem 0 0 3rem;
 
@@ -76,23 +89,12 @@ body {
 
       .bio_words {
         padding-left: 1rem;
+        display: flex;
+        // // justify-content: space-between;
+        align-items: center;
 
         .bio_paragraph {
           padding-top: .5rem;
-
-          .link_to_rest_small {
-            a {
-              padding-left: .3rem;
-              text-decoration: none;
-              color: var(--bs-orange);
-              font-size: 1.25rem;
-            }
-
-            a:hover {
-              font-size: 1.5rem;
-              color: white;
-            }
-          }
         }
       }
     }
@@ -434,18 +436,18 @@ body {
   }
 
   a:hover {
-    font-size: 1.5rem;
+    font-size: 1.25rem;
     color: var(--bs-gray-100)
   }
 
+
   .my_bio_div {
     display: grid;
-
     gap: 1rem;
     border-radius: 3rem;
     background-color: var(--bs-gray-500);
     padding: 2rem 1rem;
-
+    
 
     .bio_paragraph {
       padding-top: .5rem;
@@ -455,7 +457,7 @@ body {
       padding-left: .3rem;
       text-decoration: none;
       color: var(--bs-orange);
-      font-size: 1.25rem;
+      // font-size: 1.25rem;
     }
 
     a:hover {
@@ -465,6 +467,10 @@ body {
 
 
   }
+  // .my_bio_div_new{
+  //   font-family: 'Roboto Slab', serif;
+  //   // background-color: red;
+  // }
 }
 
 //For Screen wider than 330px

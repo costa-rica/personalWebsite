@@ -184,6 +184,11 @@ def rest_of_posts():
 
 @main.route('/more_about_me')
 def more_about_me():
+
+    # search for more about me
+
+    # get more about me file name
+
     return render_template('more_about_me.html')
 
 
