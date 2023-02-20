@@ -85,9 +85,26 @@
       </div>
 
       <div class="grid-col-span-2 recent_posts std_framing">
+
+
         <div class="recent_posts_title">
-          Recent activity
+          <div class="recent_posts_title_sub">Recent Posts</div>
+          <div class="what_is_this_super">
+      
+              <a href="https://github.com/costa-rica/socialAggregator02#readme">
+                <div class="what_is_this">
+        
+                  What is this?
+        
+                </div>
+              </a>
+      
+      
+          </div>
         </div>
+
+
+
 
         {% for post in display_post %}
 
@@ -207,7 +224,12 @@
 
       </div>
 
-
+      <script>
+        $(function(){
+          $(`[data-bs-toggle="popover"]`).popover()
+        })
+        // $("[data-bs-toggle=popover]").popover();
+      </script>
 
 
     </section>
@@ -215,3 +237,4 @@
 </div>
 
 {% endblock %}
+

@@ -11119,7 +11119,28 @@ body {
   padding: 2rem 1rem;
 }
 .home_page .recent_posts .recent_posts_title {
-  font-size: 1.1rem;
+  display: flex;
+  font-size: var(--normal_font_size);
+  height: 3rem;
+}
+.home_page .recent_posts .recent_posts_title .recent_posts_title_sub {
+  display: flex;
+  align-items: center;
+}
+.home_page .recent_posts .recent_posts_title .what_is_this_super {
+  display: flex;
+}
+.home_page .recent_posts .recent_posts_title .what_is_this_super .what_is_this {
+  background-color: var(--bs-gray-400);
+  border-radius: 3rem;
+  border-bottom-left-radius: 0.5rem;
+  font-size: 0.75rem;
+  padding: 0.15rem 0.25rem;
+}
+.home_page .recent_posts .recent_posts_title a:hover {
+  font-size: 1.25rem;
+  color: var(--bs-orange);
+  border: none;
 }
 .home_page .recent_posts a {
   text-decoration: none;

@@ -141,8 +141,32 @@ body {
     background-color: var(--bs-gray-500);
     padding: 2rem 1rem;
 
-    .recent_posts_title {
-      font-size: 1.1rem;
+    .recent_posts_title{
+      display:flex;
+      font-size: var(--normal_font_size);
+      // padding: 2rem 0 2rem 0;
+      height: 3rem;
+
+      .recent_posts_title_sub{
+        display:flex;
+        align-items: center;
+      }
+      .what_is_this_super{
+        display:flex;
+        .what_is_this{
+          background-color: var(--bs-gray-400);
+          border-radius: 3rem;
+          border-bottom-left-radius: 0.5rem;
+          font-size: .75rem;
+          padding:.15rem .25rem;
+        }
+      }
+      a:hover {
+        font-size: 1.25rem;
+        color: var(--bs-orange);
+        border: none;
+
+      }
     }
 
     a {
