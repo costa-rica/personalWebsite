@@ -7,10 +7,42 @@
 
   <link rel="stylesheet" href="{{ url_for('static', filename='../static/css/main.css') }}">
   
+    <!-- Data Tables -->
+    <link rel="stylesheet" type="text/css" href="../static/other_js_css/datatables.min.css"/>
+    <script type="text/javascript" src="../static/other_js_css/datatables.min.js"></script>
   <link rel="icon" href="../static/images/handwaveEmoji.png" type="image/x-icon">
   <title>Hi, I'm Nick</title>
 </head>
 <body >
+  <div class="flash_custom_parent">
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    {% for category, message in messages %}
+
+    <div class="alert alert-{{ category }} alert_custom" id="div_flash">
+      <i class="close icon"></i>
+
+      {{ message }}
+      <div class="close_right">
+        <input type="button" value=&#10006 onclick="removeFlash()" class="btn btn-secondary btn_custom02">
+      </div>
+
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+
+  </div>
   {% block main %}{% endblock %}
 </body>
 </html>
+
+
+  <!-- Remove flash on click -->
+  <script>
+    function removeFlash() {
+      const element = document.getElementById('div_flash');
+      element.remove();
+    }
+  </script>

@@ -1,0 +1,168 @@
+{% extends "_layout.html" %}
+{% block title %} Post to Blog {% endblock %}
+{% block main %}
+<form method="POST" id="form01" enctype=multipart/form-data></form>
+
+<section class="blog_post">
+
+  <h2>Add Blog Post</h2>
+  <p>
+    Add word documents with the formatting below.
+  </p>
+
+
+  <div class="blog_form_div">
+    <div class="blog_form_sub_top">
+
+
+
+
+      <div class="blog_form_label_div">
+
+
+        <div class="blog_form_label_div">
+          <!-- form.blog_description.label -->
+          <label for="blog_description">Description</label>
+        </div>
+        <div class="blog_form_input_div">
+          <textarea class="textarea_custom" name="blog_description" id="blog_description"
+            placeholder="optional (takes word doc 2nd/3rd paragraph)" form="form01"></textarea>
+        </div>
+
+
+        <div class="blog_form_label_div">
+          <!-- form.date_published.label -->
+          Date
+        </div>
+        <div class="blog_form_input_div">
+          <!-- form.date_published(class="input_custom" -->
+          <input type="date" id="birthday" name="date_published" class="form-control" form="form01">
+        </div>
+
+
+        <label for="action">Choose an action:</label>
+        <select id="action" name="action" onchange='onSelectChangeHandler()'>
+          <option value="HTML">HTML</option>
+          <option value="word_html">Use Word Converted HTML</option>
+        </select>
+
+        <div id="add_word_html" style="display:none">
+          <div id="add_word_html_form">
+
+            <div class="description_word_html">
+              Use this upload to add a word document that was converted to html using save as flt. Compress the image
+              folder and upload in the second input.
+            </div>
+            Upload MS Word document saved as html:
+            <div class="blog_form_input_div">
+
+              <input class="form-control" type="file" form="form01" name="post_word_html_file" accept=".html"
+                placeholder=".html">
+
+            </div>
+
+
+            Upload .zip file of images that belong to html file above:
+            <div class="blog_form_input_div">
+              <input class="form-control" type="file" form="form01" name="post_images_zip" accept=".zip"
+                placeholder="if any images from a .zip">
+            </div><!-- blog_form_input_div -->
+
+
+
+          </div><!-- add_word_html -->
+        </div><!-- add_word_html_form -->
+
+        <div id="add_html" style="display:none">
+          <div id="add_html_form">
+            Upload MS Word document saved as html:
+            <div class="blog_form_input_div">
+
+              <input class="form-control" type="file" form="form01" name="post_html_file" accept=".html"
+                placeholder=".html">
+
+            </div>
+          </div><!-- add_html_form -->
+        </div><!-- add_html -->
+
+
+      </div>
+
+
+
+      <div class="blog_form_buttons">
+
+        <div class="button_div_right">
+          <input onclick="update()" type="submit" value="Upload" class="btn btn-primary btn_custom" form="form01">
+        </div>
+
+        <br /><br />
+
+        Upload Progress Bar
+        <div class="progress" id="Progress_Status">
+          <div class="progress-bar progress-bar-striped" id="myprogressBar" role="progressbar"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- </form> -->
+
+
+
+    <!-- <div class ="crosswalk">
+    Here is a crosswalk between the word document formatting and how it shows up in the blog page:
+    <img src="{{ url_for('static', filename='images/wordToBlogCrosswalk.png') }}" alt="crosswalk">
+  </div> -->
+
+    <script>
+      function onSelectChangeHandler() {
+        var val = document.getElementById("action").value;
+
+        switch (val) {
+          case "word_html":
+            document.getElementById("add_word_html").style.display = "block";
+            document.getElementById("add_html").style.display = "none";
+            // document.getElementById("delete").style.display = "none";
+            console.log("Add word converted to html");
+            break;
+
+          case "HTML":
+            document.getElementById("add_word_html").style.display = "none";
+            document.getElementById("add_html").style.display = "block";
+            // document.getElementById("delete").style.display = "none";
+            console.log("Add html file");
+            break;
+
+          // case "delete":
+          //     document.getElementById("add").style.display="none";
+          //     document.getElementById("modify").style.display="none";
+          //     document.getElementById("delete").style.display = "block";
+          //     // console.log("Show form Delete");
+          //     break;
+        }
+      }
+
+
+    </script>
+
+    <script>
+
+      function update() {
+        var element = document.getElementById("myprogressBar");
+        var width = 10;
+        var identity = setInterval(scene, 10);
+        function scene() {
+          if (width >= 100) {
+            clearInterval(identity);
+          } else {
+            width++;
+            element.style.width = width + '%';
+          }
+        }
+      }
+    </script>
+
+
+
+</section>
+{% endblock %}

@@ -11,8 +11,6 @@ import shutil
 main = Blueprint('main', __name__)
 
 
-
-
 #Setting up Logger
 formatter = logging.Formatter('%(asctime)s:%(name)s:%(message)s')
 formatter_terminal = logging.Formatter('%(asctime)s:%(filename)s:%(name)s:%(message)s')
@@ -25,7 +23,7 @@ logger_main.setLevel(logging.DEBUG)
 
 #where do we store logging information
 # file_handler = RotatingFileHandler(os.path.join(logs_dir,'users_routes.log'), mode='a', maxBytes=5*1024*1024,backupCount=2)
-file_handler = RotatingFileHandler(os.path.join(os.environ.get('PROJ_ROOT_PATH'),'logs','main_routes.log'), mode='a', maxBytes=5*1024*1024,backupCount=2)
+file_handler = RotatingFileHandler(os.path.join(os.environ.get('WEB_ROOT'),'logs','main_routes.log'), mode='a', maxBytes=5*1024*1024,backupCount=2)
 file_handler.setFormatter(formatter)
 
 #where the stream_handler will print
@@ -41,7 +39,7 @@ logger_main.addHandler(stream_handler)
 def home():
     logger_main.info(f"- in home page: / ")
     
-    social_posts_df = pd.read_pickle(os.path.join(current_app.config.get('PROJ_DB_PATH'), current_app.config.get('SOCIAL_DF_FILE_NAME')))
+    social_posts_df = pd.read_pickle(os.path.join(current_app.config.get('DB_ROOT'), current_app.config.get('SOCIAL_DF_FILE_NAME')))
     social_posts_df['post_date_to_datetime'] = pd.to_datetime(social_posts_df['post_date'])
     social_posts_list_of_dicts = social_posts_df.sort_values('post_date_to_datetime', ascending=False).to_dict('records')
 
@@ -97,7 +95,7 @@ def home():
             break
 
 
-    return render_template('home.html', display_post = display_post)
+    return render_template('main/home.html', display_post = display_post)
 
 
 
@@ -177,7 +175,7 @@ def rest_of_posts():
     #     formDict = request.forms.to_dict()
     #     print('formDict: ', formDict)
 
-    return render_template('rest_of_posts.html', display_post = page_list_displayed, number_of_pages = number_of_pages,
+    return render_template('main/rest_of_posts.html', display_post = page_list_displayed, number_of_pages = number_of_pages,
         pagination_dict = pagination_dict, size_of_lists_for_pagination = size_of_lists_for_pagination)
 
 
@@ -189,7 +187,7 @@ def more_about_me():
 
     # get more about me file name
 
-    return render_template('more_about_me.html')
+    return render_template('main/more_about_me.html')
 
 
 @main.route('/dossier')
@@ -210,7 +208,7 @@ def dossier_location():
     print(picture)
 
 
-    return render_template('dossier_location.html', path_to_images=picture)
+    return render_template('main/dossier_location.html', path_to_images=picture)
 
 
 @main.route('/telecharger', methods=['GET','POST'])
