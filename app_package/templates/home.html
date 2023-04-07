@@ -3,65 +3,48 @@
 
 <div class="main">
   <div class="home_page">
-    <!-- <div class="page_name">
-      <h1>Nick's Personal Page</h1>
+    <div class="home_page_sub">
+
+      <div class="grid1_hide_small">
 
 
+        <div class="std_framing hide_small">
+          <div class="image_div_lg">
+            <img class="image_me_lg" src="../static/images/20200922_144128005_iOS_edited.jpg" alt="Picture of Nick">
+          </div>
 
-    </div> -->
 
-    <section class="home">
-
-      <div class="std_framing hide_small">
-        <div class="image_div_lg">
-          <img class="image_me_lg" src="../static/images/20200922_144128005_iOS_edited.jpg" alt="Picture of Nick">
         </div>
-        
 
-      </div>
-      <div class="grid-col-span-2 bio_and_ws ">
+      </div><!-- grid1_hide_small -->
 
-        <!-- <div class="center_me"> -->
+
+      <div class="grid2_bio_and_ws ">
+
         <div class="page_title">
           <h1>Hi, I'm Nick &#128075</h1>
         </div>
 
-        <div class="std_framing bio_div">
-
-          <!-- <img class="image_me_small" src="../static/images/20200922_144128005_iOS_edited.jpg" alt="Picture of Nick"> -->
-
-          <div class="bio_div_sub">
 
 
-            <div class="bio_div_sub_non_title">
-              <div class="bio_words">
-                <img class="image_me_small" src="../static/images/20200922_144128005_iOS_edited.jpg" alt="Picture of Nick">
+        <div class="about_me std_framing">
+          <div class="image_me_small_div">
+            <img class="image_me_small" src="../static/images/20200922_144128005_iOS_edited.jpg" alt="Picture of Nick">
+          </div><!-- image_me_small_div -->
 
-                
+          <div class="bio_paragraph">
+            I am an <a href="https://www.whatisanindiemaker.com/">indie maker</a>.<br>
+            I love to build things that serve others.
+            <a href="{{ url_for('main.more_about_me') }}">More about me...</a>
 
-                <div class="bio_paragraph">
-                  I am an <a href="https://www.whatisanindiemaker.com/">indie maker</a>.<br>
-                  I love to build things that serve others.
-                   <a  href="{{ url_for('main.more_about_me') }}">More about me...</a>
+          </div><!-- bio_paragraph -->
+        </div><!-- about_me -->
 
-                </div>
 
-              </div>
-             
-
-            </div>
-            <div class="div_link_to_rest">
-              <a href="{{ url_for('main.more_about_me') }}"> more...</a>
-            </div>
-          </div>
-
-        </div>
-
-        <!-- </div> -->
-
-        <div class="std_framing ws_div">
-          <div class="center_me_2">
-            I am the founder of What Sticks (WS), an application that helps navigate your wellness with data already being collected by
+        <div class="ws_div std_framing ">
+          <div class="ws_div_sub">
+            I am the founder of What Sticks (WS), an application that helps navigate your wellness with data already
+            being collected by
             your
             other applications and devices.
             <a href="https://what-sticks.com">
@@ -74,158 +57,151 @@
               understand our tendencies. I believe that WS can enhance our everyday applications and
               devices so they provide us with insights that really move the needle and improve our
               lives.
-            </div>
+            </div><!-- ws_paragraph -->
 
+          </div><!-- ws_div_sub -->
+        </div><!-- ws_div -->
+
+
+      </div><!-- grid2_bio_and_ws -->
+
+
+      <div class=" grid3_recent_posts ">
+        <div class="std_framing">
+
+          <div class="recent_posts_title">
+            <div class="recent_posts_title_sub">Recent Posts</div>
+            <div class="what_is_this_super">
+              <a href="https://github.com/costa-rica/socialAggregator02#readme">
+                <div class="what_is_this">
+                  What is this?
+                </div><!-- what_is_this -->
+              </a>
+            </div><!-- what_is_this_super -->
+          </div><!-- recent_posts_title -->
+
+
+          <div class="post_shell">
+            {% for post in display_post %}
+            {% if post.counter %}
+
+
+            <div class="bubble_super">
+              <div class="{{ post.social_name }} bubble_count">
+                <div class="bubble_title">
+                  {{ post.counter }} posts from {{ post.social_name }}
+                </div>
+
+                <div class="img_social_icon">
+                  <img class="img_bubble" src="../static/images/icons/{{ post.social_icon }}">
+                </div>
+
+              </div><!-- post.social_name bubble_count -->
+            </div><!-- bubble_super -->
+
+
+            {% else %}
+            <div class="post_social_super {{ post.social_name }}">
+
+                <a href="{{ post.url }}">
+
+                    <div class="post_social_date">
+                      {{ post.post_date }}
+                    </div>
+
+  
+                    <div class="post_social_content"><!-- sub_title-->
+  
+                      <div class="standard_title">
+                        {% if post.social_name == "Github" %}
+                        <span class="span_dark">Repoository Name: </span>{{ post.title }}
+                        <br>
+                        <small>{{ post.description }}</small>
+                        {% elif post.social_name == "Goodreads" %}
+                        Just finished reading: <br>{{ post.title }}
+                        <br>
+                        <small>by {{ post.description }}</small>
+                        {% else %}
+                        {{ post.title }}
+                        {% endif %}
+                      </div><!-- standard_title -->
+  
+                      <div class="img_social_icon">
+                        <img class="img_social" src="../static/images/icons/{{ post.social_icon }}">
+                      </div><!-- img_social_icon -->
+  
+                    </div><!-- post_social_content -->
+                    
+                </a><!-- post.url -->
+                          
+            </div><!-- post_social_name_super -->
+            {% endif %}
+
+            {% endfor %}
+          </div><!-- post_shell -->
+
+          <div class="div_link_to_rest">
+            <a href="{{ url_for('main.rest_of_posts', pagination_position=1, size_of_lists_for_pagination=10) }}"> See
+              more here ...</a>
           </div>
-        </div>
-      </div>
 
-      <div class="grid-col-span-2 recent_posts std_framing">
 
-        <div class="recent_posts_title">
-          <div class="recent_posts_title_sub">Recent Posts</div>
-          <div class="what_is_this_super">
-      
-            <a href="https://github.com/costa-rica/socialAggregator02#readme">
-              <div class="what_is_this">
-      
-                What is this?
-      
-              </div>
-            </a>
-      
+        </div><!-- std_framing -->
+      </div><!-- grid3_recent_posts -->
+
+
+      <div class="grid4_handles_div">
+        <div class="std_framing handles_div">
+          <div class="handles_div_sub">
+
+          
+          <div class="handle_std ">
+            Medium: <a href="https://medium.com/@nrodrig1">Nick Rodriguez</a>
           </div>
-        </div>
-
-        {% for post in display_post %}
-
-        {% if post.counter %}
-
-        <div class="{{ post.social_name }} bubble_count">
-
-          <div class="bubble_title">
-            {{ post.counter }} posts from {{ post.social_name }}
+  
+          <!-- <br> -->
+          <div class="handle_std">
+            Twitter: <a href="https://twitter.com/EvryMnRodriguez">@EvryMnRodriguez</a>
           </div>
-
-          <div class="img_social_icon">
-            <img src="../static/images/icons/{{ post.social_icon }}">
+  
+          <!-- <br> -->
+          <div class="handle_std">
+            Github: <a href="https://github.com/costa-rica">costa-rica</a>
           </div>
-
-        </div>
-
-        {% else %}
-
-        <a href="{{ post.url }}">
-
-          <div class="{{ post.social_name }} standard_social">
-
-            <!-- <div class="sub_post"> -->
-            <div class="sub_title_date">
-              {{ post.post_date }}
-            </div>
-
-            <!-- </div> -->
-
-            <div class="sub_title">
-
-              <div class="standard_title">
-
-
-                {% if post.social_name == "Github" %}
-
-                <span class="span_dark">Repoository Name: </span>{{ post.title }}
-                <br>
-                <small>{{ post.description }}</small>
-
-                {% elif post.social_name == "Goodreads" %}
-
-                Just finished reading: <br>{{ post.title }}
-                <br>
-                <small>by {{ post.description }}</small>
-
-                {% else %}
-
-                {{ post.title }}
-
-                {% endif %}
-
-
-              </div>
-
-              <div class="img_social_icon">
-                <img src="../static/images/icons/{{ post.social_icon }}">
-              </div>
-
-            </div>
-
-
-
+  
+          <!-- <br> -->
+          <div class="handle_std">
+            LinkedIn: <a href="https://www.linkedin.com/in/nick-rodriguez-0a31a133/">Nick Rodriguez</a>
           </div>
-        </a>
+  
+          <!-- <br> -->
+          <div class="handle_std">
+            Goodreads: <a href="https://www.goodreads.com/costa-rica">costa-rica</a>
+          </div>
+  
+          <!-- <br> -->
+          <div class="handle_std">
+            Email: nrodrig1@gmail.com
+          </div>
+  
+          <div class="handle_std">
+            <a href="{{ url_for('main.more_about_me', _anchor='resume') }}">Resume/CV</a>
+          </div>
+        </div><!-- handles_div_sub -->
+        </div><!-- handles_div -->
 
-        {% endif %}
+      </div><!-- grid4_handles_div -->
 
-        {% endfor %}
-        <div class="div_link_to_rest">
-          <a href="{{ url_for('main.rest_of_posts', pagination_position=1, size_of_lists_for_pagination=10) }}"> See
-            more here ...</a>
+      <div class="grid5_blog">
+        <div class="std_framing">
+        Blog entries (3 columns; third row)
         </div>
 
-      </div>
-
-      <div class="std_framing handles_div">
-        <!-- <div class="handles_div_title">
-          You can find me
-        </div> -->
-
-        <br>
-
-        <div class="handle_std ">
-          Medium: <a href="https://medium.com/@nrodrig1">Nick Rodriguez</a>
-        </div>
-
-        <!-- <br> -->
-        <div class="handle_std">
-          Twitter: <a href="https://twitter.com/EvryMnRodriguez">@EvryMnRodriguez</a>
-        </div>
-
-        <!-- <br> -->
-        <div class="handle_std">
-          Github: <a href="https://github.com/costa-rica">costa-rica</a>
-        </div>
-
-        <!-- <br> -->
-        <div class="handle_std">
-          LinkedIn: <a href="https://www.linkedin.com/in/nick-rodriguez-0a31a133/">Nick Rodriguez</a>
-        </div>
-
-        <!-- <br> -->
-        <div class="handle_std">
-          Goodreads: <a href="https://www.goodreads.com/costa-rica">costa-rica</a>
-        </div>
-
-        <!-- <br> -->
-        <div class="handle_std">
-          Email: nrodrig1@gmail.com
-        </div>
-
-        <div class="handle_std">
-          <a href="{{ url_for('main.more_about_me', _anchor='resume') }}">Resume/CV</a>
-        </div>
-
-      </div>
-
-      <script>
-        $(function(){
-          $(`[data-bs-toggle="popover"]`).popover()
-        })
-        // $("[data-bs-toggle=popover]").popover();
-      </script>
+      </div><!-- grid5_blog -->
 
 
-    </section>
-  </div>
-</div>
+    </div><!-- home_page_sub -->
+  </div><!-- home_page -->
+</div><!-- main -->
 
 {% endblock %}
-

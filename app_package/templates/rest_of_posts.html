@@ -9,7 +9,6 @@
     <div class="div_link_to_home">
       <a href="{{ url_for('main.home') }}"> Back home ...</a>
     </div>
-    <!-- <section class="home"> -->
 
 
     <div class="recent_posts">
@@ -17,48 +16,40 @@
 
       {% for post in display_post %}
 
-      <a href="{{ post.url }}">
+      <div class="post_social_super {{ post.social_name }}">
 
-        <div class="{{ post.social_name }} standard_social">
+        <a href="{{ post.url }}">
 
-          <div class="sub_title_date">
-            {{ post.post_date }}
-          </div>
+            <div class="post_social_date">
+              {{ post.post_date }}
+            </div>
 
 
-          <div class="sub_title">
+            <div class="post_social_content"><!-- sub_title-->
 
-            <div class="standard_title">
-
-              {% if post.social_name == "Github" %}
-
+              <div class="standard_title">
+                {% if post.social_name == "Github" %}
                 <span class="span_dark">Repoository Name: </span>{{ post.title }}
                 <br>
                 <small>{{ post.description }}</small>
-
-              {% elif post.social_name == "Goodreads" %}
-
-                Just finished reading: <br> {{ post.title }}
+                {% elif post.social_name == "Goodreads" %}
+                Just finished reading: <br>{{ post.title }}
                 <br>
-                <small> by {{ post.description }}</small>
-
-              {% else %}
-
+                <small>by {{ post.description }}</small>
+                {% else %}
                 {{ post.title }}
+                {% endif %}
+              </div><!-- standard_title -->
 
-              {% endif %}
-            </div>
+              <div class="img_social_icon">
+                <img class="img_social" src="../static/images/icons/{{ post.social_icon }}">
+              </div><!-- img_social_icon -->
 
-            <div class="img_social_icon">
-              <img src="../static/images/icons/{{ post.social_icon }}">
-            </div>
-
-          </div>
-
-
-
-        </div>
-      </a>
+            </div><!-- post_social_content -->
+            
+        </a><!-- post.url -->
+                  
+    </div><!-- post_social_name_super -->
       {% endfor %}
 
       
@@ -90,7 +81,6 @@
       <a href="{{ url_for('main.rest_of_posts', pagination_position=1, size_of_lists_for_pagination=0) }}" >All</a>
     </div>
 
-    <!-- </section> -->
   </div>
 </div>
 
