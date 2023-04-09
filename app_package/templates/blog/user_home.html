@@ -1,6 +1,7 @@
 {% extends "_layout.html" %}
 {% block title %} User Blog Home {% endblock %}
 {% block main %}
+<form method="POST" id="form01" enctype=multipart/form-data></form>
 
 <section class="blog_home">
 
@@ -14,12 +15,12 @@
   </p>
   <div class="post_btn_div">
     {% if not current_user.guest_account %}
-    <a class="btn btn-info extra_padding" href="{{ url_for('blog.blog_post') }}">Post</a>
+    <a class="btn btn-info extra_padding" href="{{ url_for('blog.create_post') }}">Create Post</a>
     {% endif %}
   </div>
 </div>
 
-  <form method=POST enctype=multipart/form-data>
+  <!-- <form method=POST enctype=multipart/form-data> -->
 
     <div class="table_background_sub">
       <div class="table_background">
@@ -52,7 +53,8 @@
               <td >
 
                 <button type="button" class="dash_id_button form-control"
-                data-bs-toggle="modal" data-bs-target="#deleteModal" data-bs-whatever="{{ row[0] }}">Delete Post {{ row[0] }}</button>
+                data-bs-toggle="modal" data-bs-target="#deleteModal" data-bs-whatever="{{ row[0] }}" 
+                >Delete Post {{ row[0] }}</button>
               </td>
 
               {% for i in range(2,len(row)) %}
@@ -79,8 +81,8 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body modal_body_delete">
-        <button type="submit" class="btn btn-primary delete_button" id="yes_delete" name="delete_button">Yes, delete</button>
-        <input type="text" class="form-control hide_textbox" id="recipient-name" name="delete_record_id" readonly>
+        <button type="submit" class="btn btn-primary delete_button" id="yes_delete" name="delete_button" form="form01" >Yes, delete</button>
+        <input type="text" class="form-control hide_textbox" id="recipient-name" name="delete_record_id" form="form01" readonly>
       </div>
 
       </div>
@@ -88,7 +90,7 @@
     </div>
     </div>
 
-  </form>
+  <!-- </form> -->
 
 
   </section>

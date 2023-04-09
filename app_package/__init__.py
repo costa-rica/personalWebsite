@@ -44,7 +44,7 @@ logging.getLogger('werkzeug').setLevel(logging.DEBUG)
 logging.getLogger('werkzeug').addHandler(file_handler)
 #End set up logger
 
-logger_init.info(f'--- Starting ws08web ---')
+logger_init.info(f'--- Starting personalWebsite for iamnick.info ---')
 
 mail = Mail()
 

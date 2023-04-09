@@ -4,3 +4,4 @@ __pycache__/
 .DS_Store
 app_package/static/images/dossier/
 /app_package/static/node_modules/
+/app_package/templates/posts/

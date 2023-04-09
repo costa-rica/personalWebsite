@@ -73,6 +73,92 @@ def create_new_html_text(html_file_path_and_name, static_image_folder_path):
     return str(soup)
 
 
+def replace_img_src_jinja(blog_post_index_file_path_and_name):
+    
+    print("- blog_post_index_file_path_and_name -")
+    print(blog_post_index_file_path_and_name)
+    
+    #read html into beautifulsoup
+    with open(blog_post_index_file_path_and_name) as fp:
+        soup = BeautifulSoup(fp, 'html.parser')
+
+    #get all images tags in html
+    image_list = soup.find_all('img')
+
+    # # check all images have src or remove
+    # for img in image_list:
+    #     try:
+    #         if img.get('src') == "":
+    #             image_list.remove(img)
+    #         else:
+    #             #remove old folder name from image path reference
+    #             img['src'] = img['src'][img['src'].find("/")+1:]
+                
+    #             # img['src'][img['src'].find("/")+1:]
+    #     except AttributeError:
+    #         image_list.remove(img)
+    
+    # images_dict = {}
+
+    # check all images have src or remove
+    # for img in image_list:
+    for img in soup.find_all('img'):
+        # temp_dict = {}
+        # try:
+        #     if img.get('src') == "":
+        #         image_list.remove(img)
+        #         print("removed img")
+        #     else:
+        print("***** REPLACING src *****")
+        img['src'] = "{{ url_for('blog.custom_static', post_id_name_string=post_id_name_string,img_dir_name='" + \
+            img['src'][:img['src'].find("/")] \
+            +"', filename='"+ img['src'][img['src'].find("/")+1:]+"')}}"
+        # img['src'] = "{{ url_for('blog.custom_static', post_id_name_string=post_id_name_string,img_dir_name=" + \
+        #     images_dict.get(image_list[0]['src']).get('img_dir_name') \
+        #     +", filename="+ images_dict.get(image_list[0]['src']).get('img_name')+")}}"
+    #             #remove old folder name from image path reference
+    # #             img['src'] = img['src'][img['src'].find("/")+1:]
+    #             key = img['src']
+    #             temp_dict['img_dir_name'] = img['src'][:img['src'].find("/")]
+    #             temp_dict['img_name'] = img['src'][img['src'].find("/")+1:]
+    #             print("good image src")
+    #             images_dict[key] = temp_dict
+        # except AttributeError:
+        #     image_list.remove(img)
+        #     print('removed img with exception')
+
+
+    # post_static_dir = os.path.join(current_app.config.get('DB_ROOT'), "posts", new_post_dir_name)
+
+    # # search through all files and sub files in db\posts\0000_post\
+    # post_dir_list = []
+    # for f in os.scandir(post_static_dir):
+    #     if f.is_dir():
+    #         for sub_f in f:
+    #             post_dir_list.append((f, sub_f))
+    #     else:
+    #         post_dir_list.append("root", f)
+
+    # print("*******")
+    # print("post_dir_list")
+    # print(post_dir_list)
+
+    # #loop thorugh image
+    # # --> add possible subfolder for path from 
+    # for img in image_list:
+    #     img['src']="{{ url_for('" + post_static_dir + "\\" + img['src'] + "}}"
+    #     # img['src']=f"{static_image_folder_path}{img['src']}"
+
+    # with only good images in image list replace with the  double curly's format
+    # for image in image_list:
+    #     img['src'] = "{{ url_for('blog.custom_static', post_id_name_string=post_id_name_string,img_dir_name=" +images_dict.get(image_list[0]['src']).get('img_dir_name') \
+    #         +", filename="+ images_dict.get(image_list[0]['src']).get('img_name')+")}}"
+
+    print(soup)
+    return str(soup)
+
+
+
 def save_post_html(formDict, post_html_file, file_path_str_to_templates_blog_posts, post_html_filename):
     # save file with regular name in tmpleates/blog/post
     post_html_file.save(os.path.join(file_path_str_to_templates_blog_posts, post_html_filename))
@@ -189,23 +275,5 @@ def save_post_images(post_images_zip, post_id_name_string, blog_post_new_name):
         new_file.write(new_html_text)
 
 
-def build_comment_dict(comments_query_list):
-
-    #create dictionary
-    comments_list = []
-
-    for comment in comments_query_list:
-        temp_dict = {}
-        #get comment author
-        temp_dict["comment_id"] = comment.id
-        temp_dict["username"] = sess.query(Users).filter_by(id=comment.user_id).first().username
-
-        #get comment date
-        temp_dict["date_published"] = comment.date_published.strftime("%Y-%m-%d %H:%M")
-
-        # add comment comment
-        temp_dict["comment"] = comment.comment
-
-        comments_list.append(temp_dict)
-    
-    return comments_list
+def copy_posts_from_db_dir():
+    pass

@@ -167,8 +167,8 @@ section.blog{
 
 }
 
-/*Blog Post*/
-section.blog_post{
+/* Create Post*/
+.create_post{
     padding: var(--nav-height) 0 60px 30px;
     // background-color: red;
     .blog_form_div{
@@ -177,47 +177,49 @@ section.blog_post{
         border-radius: 10px;
         background-color: var(--bs-gray-500);
         margin: 2% 5% 2% 0;
+    }
 
-        .blog_form_sub_top{
-            padding: 0 0 50px 20px;
-            .input_custom{width: 70%
-            }
-            .textarea_custom{
-                width: 100%;
-            }
-            .blog_form_input_div{
-                min-width:150px;
-                max-width:80%;
-            }
+    .blog_form_sub_top{
+        padding: 0 0 50px 20px;
+        .input_custom{width: 70%
         }
-
-        #Progress_Status {
-            width: 50%;
-            background-color: #ddd;
-            margin-left: 30px;
-            }
-        #myprogressBar {
-        /* Starting point of progress bar */
-        width: 0; 
-        height: 20px;
-        background-color: #4CAF50;
+        .textarea_custom{
+            width: 100%;
         }
-
-
-        .blog_form_buttons{
-            padding: 0 0 50px 20px;
-            .button_custom{ background-color: var(--bs-cyan);}
-            .file_custom{min-width:150px;width:56%}
-            
-            .button_div_right{
-                width:60%;
-                // padding: 0 0 50px 20px;
-                .btn_custom{float: right;}
-                // display:flex;
-                // align-items: flex-end;
-            }
+        .blog_form_input_div{
+            min-width:150px;
+            max-width:80%;
         }
     }
+    .old_ws_method_div{
+        display:none;
+        background-color: var(--bs-gray-400);
+    }
+
+    #Progress_Status {
+        width: 50%;
+        background-color: #ddd;
+        margin-left: 30px;
+        }
+    #myprogressBar {
+    /* Starting point of progress bar */
+    width: 0; 
+    height: 20px;
+    background-color: #4CAF50;
+    }
+
+
+    .blog_form_buttons{
+        padding: 0 0 50px 20px;
+        .button_custom{ background-color: var(--bs-cyan);}
+        .file_custom{min-width:150px;width:56%}
+        
+        .button_div_right{
+            width:60%;
+            .btn_custom{float: right;}
+        }
+    }
+    
 }
 
 /*Blog Home*/

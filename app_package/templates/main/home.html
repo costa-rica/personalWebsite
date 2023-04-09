@@ -194,7 +194,53 @@
 
       <div class="grid5_blog">
         <div class="std_framing">
-        Blog entries (3 columns; third row)
+
+
+          <div class="grid5_blog_title_super">
+            <div class="grid5_blog_title">Blog: Peak of <i>MT Stupid</i></div>
+              <div class="what_is_this_super">
+                <a href="https://medium.com/towards-data-science/my-technical-writing-journey-14ea1ca18e79">
+                  <div class="what_is_this">
+                    What is "MT Stupid"?
+                  </div><!-- what_is_this -->
+                </a>
+              </div><!-- what_is_this_super -->
+
+
+            <!-- <div class="grid5_blog_title_sub">
+              (<i>Mostly things I've barely learned and trying to fortify in my mind</i>)
+            </div> -->
+            
+          </div><!-- grid5_blog_title -->
+
+
+
+          {% for post in blog_posts_list %}
+        <div class="blogpost_super">
+          <a href="{{ url_for('blog.view_post', post_id_name_string=post[3]) }}">
+        
+            <div class="blogpost">
+            <div class="blogpost_date">
+              {{ post[0] }}
+            </div>
+            
+            
+            <div class="blogpost_title">
+              {{ post.1 }}
+            </div>
+            
+            
+            <div class="blogpost_description">
+              {{ post.2 }}
+            </div>
+            
+            
+          </div>
+        </a>
+        </div>
+
+
+        {% endfor %}
         </div>
 
       </div><!-- grid5_blog -->

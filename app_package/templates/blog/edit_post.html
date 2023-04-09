@@ -1,0 +1,61 @@
+{% extends "_layout.html" %}
+{% block title %} Post to Blog {% endblock %}
+{% block main %}
+<form method="POST" id="form01" enctype=multipart/form-data></form>
+
+<div class="edit_post">
+
+  <h2>Edit blog post</h2>
+
+
+
+  <div class="blog_form_div">
+    <div class="blog_form_sub_top">
+
+      <div class="blog_form_label_div">
+
+
+        <div class="blog_form_label_div">
+          <label for="blog_description">Title</label>
+        </div>
+        <div class="blog_form_input_div">
+
+        </div>
+
+        <div class="blog_form_label_div">
+          <label for="blog_description">Description</label>
+        </div>
+        <div class="blog_form_input_div">
+          <textarea class="textarea_custom" name="blog_description" id="blog_description"
+            placeholder="optional (takes word doc 2nd/3rd paragraph)" form="form01"></textarea>
+        </div>
+
+
+        <div class="blog_form_label_div">
+          Date
+        </div>
+        <div class="blog_form_input_div">
+          <input type="date" name="date_published" class="form-control" value="{{ default_date }}" form="form01">
+        </div>
+
+        <br><br>
+
+
+
+
+      </div><!-- blog_form_label_div -->
+
+      <div class="blog_form_buttons">
+
+        <div class="button_div_right">
+          <input type="submit" value="Upload" class="btn btn-primary btn_custom" form="form01">
+        </div>
+
+        <br /><br />
+
+
+
+
+
+  </div>
+  {% endblock %}

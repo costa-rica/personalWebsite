@@ -29,6 +29,10 @@ load_dotenv()
 if not os.path.exists(config.DB_ROOT):
     os.mkdir(config.DB_ROOT)
 
+if not os.path.exists(os.path.join(config.DB_ROOT,"posts")):
+    os.mkdir(os.path.join(config.DB_ROOT,"posts"))
+
+
 Base = declarative_base()
 engine = create_engine(config.SQL_URI, echo = False, connect_args={"check_same_thread": False})
 Session = sessionmaker(bind = engine)
@@ -65,10 +69,12 @@ class Users(Base, UserMixin):
 class Blogposts(Base):
     __tablename__ = 'blogposts'
     id = Column(Integer, primary_key = True)
+    post_id_name_string = Column(String(10))
     user_id = Column(Integer, ForeignKey("users.id"))
     title = Column(Text)
     description = Column(Text)
     post_html_filename = Column(Text)
+    date_published = Column(DateTime)
     time_stamp_utc = Column(DateTime, nullable = False, default = datetime.utcnow)
 
 

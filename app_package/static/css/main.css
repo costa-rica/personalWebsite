@@ -11163,11 +11163,11 @@ section.blog .iframe_embed {
   height: 50vh;
 }
 
-/*Blog Post*/
-section.blog_post {
+/* Create Post*/
+.create_post {
   padding: var(--nav-height) 0 60px 30px;
 }
-section.blog_post .blog_form_div {
+.create_post .blog_form_div {
   border: 1px solid;
   margin: 0;
   padding: 0;
@@ -11175,44 +11175,48 @@ section.blog_post .blog_form_div {
   background-color: var(--bs-gray-500);
   margin: 2% 5% 2% 0;
 }
-section.blog_post .blog_form_div .blog_form_sub_top {
+.create_post .blog_form_sub_top {
   padding: 0 0 50px 20px;
 }
-section.blog_post .blog_form_div .blog_form_sub_top .input_custom {
+.create_post .blog_form_sub_top .input_custom {
   width: 70%;
 }
-section.blog_post .blog_form_div .blog_form_sub_top .textarea_custom {
+.create_post .blog_form_sub_top .textarea_custom {
   width: 100%;
 }
-section.blog_post .blog_form_div .blog_form_sub_top .blog_form_input_div {
+.create_post .blog_form_sub_top .blog_form_input_div {
   min-width: 150px;
   max-width: 80%;
 }
-section.blog_post .blog_form_div #Progress_Status {
+.create_post .old_ws_method_div {
+  display: none;
+  background-color: var(--bs-gray-400);
+}
+.create_post #Progress_Status {
   width: 50%;
   background-color: #ddd;
   margin-left: 30px;
 }
-section.blog_post .blog_form_div #myprogressBar {
+.create_post #myprogressBar {
   /* Starting point of progress bar */
   width: 0;
   height: 20px;
   background-color: #4CAF50;
 }
-section.blog_post .blog_form_div .blog_form_buttons {
+.create_post .blog_form_buttons {
   padding: 0 0 50px 20px;
 }
-section.blog_post .blog_form_div .blog_form_buttons .button_custom {
+.create_post .blog_form_buttons .button_custom {
   background-color: var(--bs-cyan);
 }
-section.blog_post .blog_form_div .blog_form_buttons .file_custom {
+.create_post .blog_form_buttons .file_custom {
   min-width: 150px;
   width: 56%;
 }
-section.blog_post .blog_form_div .blog_form_buttons .button_div_right {
+.create_post .blog_form_buttons .button_div_right {
   width: 60%;
 }
-section.blog_post .blog_form_div .blog_form_buttons .button_div_right .btn_custom {
+.create_post .blog_form_buttons .button_div_right .btn_custom {
   float: right;
 }
 
@@ -11497,6 +11501,7 @@ body {
 }
 .home_page .grid3_recent_posts .recent_posts_title_sub {
   font-size: var(--normal_font_size);
+  padding-left: 1rem;
 }
 .home_page .grid3_recent_posts .what_is_this {
   background-color: var(--bs-gray-400);
@@ -11612,7 +11617,60 @@ body {
   padding-top: 1rem;
 }
 .home_page .grid5_blog {
-  display: none;
+  padding-top: 1rem;
+}
+.home_page .grid5_blog .grid5_blog_title_super {
+  display: flex;
+  flex-wrap: wrap;
+}
+.home_page .grid5_blog .grid5_blog_title {
+  font-size: var(--normal_font_size);
+  padding-left: 1rem;
+}
+.home_page .grid5_blog .grid5_blog_title_sub {
+  font-size: 0.9rem;
+  width: 100%;
+  padding-left: 1rem;
+}
+.home_page .grid5_blog .what_is_this {
+  background-color: var(--bs-gray-400);
+  border-radius: 3rem;
+  border-bottom-left-radius: 0.5rem;
+  font-size: 0.75rem;
+  padding: 0.15rem 0.25rem;
+  margin: -0.6rem 0 0 0.25rem;
+}
+.home_page .grid5_blog a {
+  text-decoration: none;
+  color: var(--nick_page_theme_font_color);
+}
+.home_page .grid5_blog a:hover {
+  font-size: 1.25rem;
+  color: var(--bs-orange);
+  border: none;
+}
+.home_page .grid5_blog .blogpost_super {
+  padding: 0.5rem 0;
+}
+.home_page .grid5_blog .blogpost {
+  width: 100%;
+  border: 0.5rem solid transparent;
+  border-radius: 1rem;
+  padding: 0.5rem;
+  background-color: var(--bs-gray-400);
+}
+.home_page .grid5_blog .blogpost a {
+  text-decoration: none;
+  color: var(--nick_page_theme_font_color);
+}
+.home_page .grid5_blog .blogpost:hover {
+  border: 0.5rem solid var(--bs-orange);
+}
+.home_page .grid5_blog .blogpost_date {
+  color: var(--bs-gray-600);
+}
+.home_page .grid5_blog .blogpost_title {
+  font-size: var(--normal_font_size);
 }
 
 .rest_of_posts .div_link_to_home {
