@@ -2,6 +2,7 @@
 @use "resume";
 @use "dossier";
 @use "blog";
+@use "admin";
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;700&display=swap');
 
 
@@ -233,6 +234,9 @@ body {
       font-size: var(--normal_font_size);
       // width:100%;
       padding-left:1rem;
+      .no_show{
+        text-decoration: none;
+      }
     }
     .grid5_blog_title_sub{
       font-size:.9rem;

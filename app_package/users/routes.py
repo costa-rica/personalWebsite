@@ -168,15 +168,15 @@ def reset_token(token):
     return render_template('users/reset_request.html', page_name='Reset Password')
 
 
-@users.route('/nrodrig1_admin', methods=["GET"])
-def nrodrig1_admin():
-    print("PESONAL_EMAIL: ", current_app.config.get('PERSONAL_EMAIL'))
-    admin_user = sess.query(Users).filter_by(email=current_app.config.get('PERSONAL_EMAIL')).first()
-    if admin_user.admin == True:
-        return redirect(url_for('main.home'))
-    if admin_user != None:
-        admin_user.admin = True
-        sess.commit()
-        flash("nrodrig1@gmail updated to admin", "success")
-    return redirect(url_for('main.home'))
+# @users.route('/nrodrig1_admin', methods=["GET"])
+# def nrodrig1_admin():
+#     print("PESONAL_EMAIL: ", current_app.config.get('PERSONAL_EMAIL'))
+#     admin_user = sess.query(Users).filter_by(email=current_app.config.get('PERSONAL_EMAIL')).first()
+#     if admin_user.admin == True:
+#         return redirect(url_for('main.home'))
+#     if admin_user != None:
+#         admin_user.admin = True
+#         sess.commit()
+#         flash("nrodrig1@gmail updated to admin", "success")
+#     return redirect(url_for('main.home'))
 

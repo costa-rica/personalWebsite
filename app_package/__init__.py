@@ -58,10 +58,12 @@ def create_app(config_class=config):
     from app_package.main_api.routes import main_api
     from app_package.users.routes import users
     from app_package.blog.routes import blog
+    from app_package.admin.routes import admin
 
     app.register_blueprint(main)
     app.register_blueprint(main_api)
     app.register_blueprint(users)
     app.register_blueprint(blog)
+    app.register_blueprint(admin)
 
     return app

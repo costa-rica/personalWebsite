@@ -197,7 +197,14 @@
 
 
           <div class="grid5_blog_title_super">
+            {% if current_user.admin %}
+            <a href="{{ url_for('blog.blog_user_home' ) }}" class="no_show" >
+              <div class="grid5_blog_title">Blog: Peak of <i>MT Stupid</i></div>
+            </a>
+            
+            {% else %}
             <div class="grid5_blog_title">Blog: Peak of <i>MT Stupid</i></div>
+            {% endif %}
               <div class="what_is_this_super">
                 <a href="https://medium.com/towards-data-science/my-technical-writing-journey-14ea1ca18e79">
                   <div class="what_is_this">

@@ -222,24 +222,30 @@ section.blog{
     
 }
 
-/*Blog Home*/
-section.blog_home{
-    padding: var(--nav-height) 0 0 2rem;
-    .top_custom_div{
-        display: flex;
-        justify-content: space-between;
+/* /blog_user_home */
+.blog_home_super{
+
+    display: flex;
+    justify-content: center;
+
+    .blog_home{
+        width: calc(100% - 15rem);
+
     }
-    .table_background_sub {
-        width:90%;
-    }
+
     .post_btn_div{
         display: flex;
         justify-content: end;
-        margin-right:10%;
-        // height:0;
-        // .extra_padding{width: 10%;}
+        padding:2rem 2rem 0 0;
+        a{width: 20rem;}
     }
-    .p_div_custom{padding-left: 10%}
+    .admin_btn_div{
+        display: flex;
+        justify-content: end;
+        padding:.5rem 2rem 2rem 0;
+        a{width: 20rem;}
+    }
+
     .table_contents {
         font-size: .7em;
         background: var(--bs-primary);
@@ -286,118 +292,40 @@ section.blog_home{
 
 /*Blog Post Edit*/
 //This is from Blog Post
-section.blog_edit{
+.edit_post_super{
     padding: var(--nav-height) 0 60px 30px;
     // background-color: red;
     font-size: 2rem;
+    display:flex;
+    justify-content: center;
+
     .blog_form_div{
+        width:calc( 100% - 5rem);
         border:1px solid ;
-        margin: 0; padding: 0;
-        border-radius: 10px;
+        // margin: 0; padding: 0;
+        border-radius: 1rem;
         background-color: var(--bs-gray-500);
-        margin: 2% 5% 2% 0;
+        // margin: 2% 5% 2% 0;
+        padding: 2rem;
 
         .blog_form_sub_top{
             padding: 20px 0 50px 5%;
             .input_custom{width: 95%;
             }
-            .textarea_custom{width: 95%;}
+            // .textarea_custom{width: 95%;}
             .blog_form_input_div{
                 min-width:150px;
                 max-width:80%;
             }
         }
-
-        .table_background_sub{
-            margin:0 0 0 5%;
-            width: 90%;
-            .word_row_column{width:10%;}
-            .row_tag_column{width:20%;}
-            .row_html_column{width:70%;}
-            .form_custom{padding:0;}
-            .table_custom_fit {
-                width: 90%;
-            }
+        .button_div_right{
+            display:flex;
+            justify-content: end;
+            padding: 3rem 3rem 0 0;
         }
+        .gray_input{background-color: var(--bs-gray-500);}
 
-
-        #Progress_Status {
-            width: 50%;
-            background-color: #ddd;
-            margin-left: 30px;
-            }
-        #myprogressBar {
-        /* Starting point of progress bar */
-        width: 0; 
-        height: 20px;
-        background-color: #4CAF50;
-        }
-
-        .merge_cons_lines{
-            padding: 20px 5% 50px 5%;
-            .merge_cons_lines_sub {
-                
-                border:1px solid ;
-                border-radius: 10px;
-                .line_number {
-                    width: 40px;
-                }
-            }
-        }
-
-
-        .blog_form_buttons{
-            padding: 0 0 50px 20px;
-            .button_custom{ background-color: var(--bs-cyan);}
-            .file_custom{min-width:150px;width:56%}
-            
-            .button_div_right{
-                width:90%;
-                padding: 0 0 50px 20px;
-                .btn_custom{
-                    float: right;
-                    background: var(--bs-teal);
-                    width: 10em;
-                    font-size: 1.3em;
-                    border-radius: 10px;
-                }
-                // display:flex;
-                // align-items: flex-end;
-            }
-        }
-    }
-    .id_button_delete:hover{
-        background: #E54E4E;
-        background-size: contain;
-        padding: 3px 7px 5px;
-        top: -5px;
-        right: -5px;
-        border-radius: 10px;
-    }
-    .id_button_merge:hover{
-        background: var(--bs-teal);
-        background-size: contain;
-        padding: 3px 7px 5px;
-        top: -5px;
-        right: -5px;
-        border-radius: 10px;
-    }
-    .id_button_hide{
-        display: none;
-    }
-    //Below are bootstrap table row attritbutes for non id columns
-    // table td{
-    //     background-color: var(--bs-gray-100);
-    // }
-
-    // Works if uncommented!
-    //Below are bootstrap table row attritbutes for id column ODDs
-    // table.dataTable.display tbody tr.odd>.sorting_1,table.dataTable.order-column.stripe tbody tr.odd>.sorting_1{background-color:#f1f1f1}
-    // table.dataTable.display tbody tr.odd>.sorting_1,table.dataTable.order-column.stripe tbody tr.odd>.sorting_1{background-color:var(--bs-cyan)}
-    // //Below are bootstrap table row attritbutes for id column EVENS
-    // // table.dataTable.order-column tbody tr>.sorting_1,table.dataTable.order-column tbody tr>.sorting_2,table.dataTable.order-column tbody tr>.sorting_3,table.dataTable.display tbody tr>.sorting_1,table.dataTable.display tbody tr>.sorting_2,table.dataTable.display tbody tr>.sorting_3{background-color:#fafafa}
-    // table.dataTable.order-column tbody tr>.sorting_1,table.dataTable.order-column tbody tr>.sorting_2,table.dataTable.order-column tbody tr>.sorting_3,table.dataTable.display tbody tr>.sorting_1,table.dataTable.display tbody tr>.sorting_2,table.dataTable.display tbody tr>.sorting_3{background-color:var(--bs-success)}
-    
+}
 }
 
 

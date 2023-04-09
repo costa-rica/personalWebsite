@@ -78,54 +78,33 @@ def replace_img_src_jinja(blog_post_index_file_path_and_name):
     print("- blog_post_index_file_path_and_name -")
     print(blog_post_index_file_path_and_name)
     
-    #read html into beautifulsoup
-    with open(blog_post_index_file_path_and_name) as fp:
-        soup = BeautifulSoup(fp, 'html.parser')
+    try:
+        #read html into beautifulsoup
+        with open(blog_post_index_file_path_and_name) as fp:
+            soup = BeautifulSoup(fp, 'html.parser')
+    except FileNotFoundError:
+        return "Error opening index.html"
 
     #get all images tags in html
     image_list = soup.find_all('img')
 
-    # # check all images have src or remove
-    # for img in image_list:
-    #     try:
-    #         if img.get('src') == "":
-    #             image_list.remove(img)
-    #         else:
-    #             #remove old folder name from image path reference
-    #             img['src'] = img['src'][img['src'].find("/")+1:]
-                
-    #             # img['src'][img['src'].find("/")+1:]
-    #     except AttributeError:
-    #         image_list.remove(img)
-    
-    # images_dict = {}
 
     # check all images have src or remove
     # for img in image_list:
     for img in soup.find_all('img'):
         # temp_dict = {}
-        # try:
-        #     if img.get('src') == "":
-        #         image_list.remove(img)
-        #         print("removed img")
-        #     else:
-        print("***** REPLACING src *****")
-        img['src'] = "{{ url_for('blog.custom_static', post_id_name_string=post_id_name_string,img_dir_name='" + \
-            img['src'][:img['src'].find("/")] \
-            +"', filename='"+ img['src'][img['src'].find("/")+1:]+"')}}"
-        # img['src'] = "{{ url_for('blog.custom_static', post_id_name_string=post_id_name_string,img_dir_name=" + \
-        #     images_dict.get(image_list[0]['src']).get('img_dir_name') \
-        #     +", filename="+ images_dict.get(image_list[0]['src']).get('img_name')+")}}"
-    #             #remove old folder name from image path reference
-    # #             img['src'] = img['src'][img['src'].find("/")+1:]
-    #             key = img['src']
-    #             temp_dict['img_dir_name'] = img['src'][:img['src'].find("/")]
-    #             temp_dict['img_name'] = img['src'][img['src'].find("/")+1:]
-    #             print("good image src")
-    #             images_dict[key] = temp_dict
-        # except AttributeError:
-        #     image_list.remove(img)
-        #     print('removed img with exception')
+        try:
+            if img.get('src') == "":
+                image_list.remove(img)
+                print("removed img")
+            else:
+                print("***** REPLACING src *****")
+                img['src'] = "{{ url_for('blog.custom_static', post_id_name_string=post_id_name_string,img_dir_name='" + \
+                    img['src'][:img['src'].find("/")] \
+                    +"', filename='"+ img['src'][img['src'].find("/")+1:]+"')}}"
+        except AttributeError:
+            image_list.remove(img)
+            print('removed img with exception')
 
 
     # post_static_dir = os.path.join(current_app.config.get('DB_ROOT'), "posts", new_post_dir_name)

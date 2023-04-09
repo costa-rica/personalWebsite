@@ -228,6 +228,10 @@ def create_post():
             # blog_id = new_blogpost.id
             new_blog_id = new_blogpost.id
             new_post_dir_name = f"{new_blog_id:04d}_post"
+            new_blogpost.post_id_name_string = new_post_dir_name
+            new_blogpost.date_published = date_published_datetime
+            sess.commit()
+
 
             # save zip to temp_zip
             temp_zip_db_fp = os.path.join(current_app.config.get('DB_ROOT'),'temp_zip')
@@ -245,6 +249,11 @@ def create_post():
 
             # check new_blog_dir_fp doesn't already exists -- This is a weird check but let's just leave it in....
             if os.path.exists(new_blog_dir_fp):
+
+                # delete db entery
+
+                # delete db/posts/000_post dir
+
                 flash(f"This blog post is trying to build a directory to store post, but one already exists in: {new_blog_dir_fp}","warning")
                 return redirect(request.url)
 
@@ -281,16 +290,12 @@ def create_post():
             print("Destination path:", dest) 
 
 
-
-            ###############################################################################
-            # TODO: This beautiful soup needs to serach the index.html file in the rooot of the 0000_post
-            # dir and replace the ______/filename.png with {{ url_for('custom_static', ___, __ ,__)}}
-            # replace_img_src_jinja is almost doing this
-            ##############################################################################
-            print('---- Before beautiful soup stuff -')
-            print("new_post_dir_name: ", os.path.join(new_blog_dir_fp,"index.html"))
-            # beautiful soup to search and replace img src
+            # beautiful soup to search and replace img src with {{ url_for('custom_static', ___, __ ,__)}}
             new_index_text = replace_img_src_jinja(os.path.join(new_blog_dir_fp,"index.html"))
+            if new_index_text == "Error opening index.html":
+                flash(f"Missing index.html? There was an problem trying to opening {os.path.join(new_blog_dir_fp,'index.html')}.", "warning")
+                # return redirect(request.url)
+                return redirect(url_for('blog.blog_delete', post_id=new_blog_id))
 
             # remove existing new_blog_dir_fp, index.html
             os.remove(os.path.join(new_blog_dir_fp,"index.html"))
@@ -306,8 +311,6 @@ def create_post():
 
             # update new_blogpost.post_html_filename = post_id_post/index.html
             new_blogpost.post_html_filename = os.path.join(new_post_dir_name,"index.html")
-            new_blogpost.post_id_name_string = new_post_dir_name
-            new_blogpost.date_published = date_published_datetime
             new_blogpost.title = get_title(os.path.join(new_blog_dir_fp,"index.html"))
             sess.commit()
 
@@ -315,6 +318,7 @@ def create_post():
 
 
         flash(f'Post added successfully!', 'success')
+        return redirect(url_for('blog.blog_edit', post_id = new_blog_id))
 
     return render_template('blog/create_post.html', default_date=default_date)
 
@@ -363,6 +367,9 @@ def blog_user_home():
 def blog_delete(post_id):
     post_to_delete = sess.query(Blogposts).get(int(post_id))
 
+    print("where did the reqeust come from: ", request.referrer)
+    print("-------------------------------------------------")
+
     if current_user.id != post_to_delete.user_id:
         return redirect(url_for('blog.post_index'))
     logger_blog.info('-- In delete route --')
@@ -379,110 +386,53 @@ def blog_delete(post_id):
     # delete from database
     sess.query(Blogposts).filter(Blogposts.id==post_id).delete()
     sess.commit()
+    print(' request.referrer[len("create_post")*-1: ]:::', request.referrer[len("create_post")*-1: ])
+    if request.referrer[len("create_post")*-1: ] == "create_post":
+        return redirect(request.referrer)
+
     flash(f'Post removed successfully!', 'success')
     return redirect(url_for('blog.blog_user_home'))
 
 
-@blog.route("/edit", methods=['GET','POST'])
+@blog.route("/edit/<post_id>", methods=['GET','POST'])
 @login_required
-def blog_edit():
-    if current_user.id != 1:
-        return redirect(url_for('blog.post_index'))
-    print('** Start blog edit **')
-    post_id = int(request.args.get('post_id'))
-    post = sess.query(Posts).filter_by(id = post_id).first()
-    postHtml_list = sess.query(Postshtml).filter_by(post_id = post_id).all()[1:]
-    published_date = post.date_published.strftime("%Y-%m-%d")
+def blog_edit(post_id):
+    if not current_user.admin:
+        return redirect(url_for('main.home'))
 
-    # get list of word_row_id for post_id
-    # put last object in first object's place
-    merge_row_id_list = last_first_list_util(post_id)[1:]
+    post = sess.query(Blogposts).filter_by(id = post_id).first()
+    title = post.title
+    description = post.description
+    post_time_stamp_utc = post.time_stamp_utc.strftime("%Y-%m-%d")
 
-    column_names = ['word_row_id', 'row_tag', 'row_going_into_html','merge_with_bottom']
-    row_format_options = ['new lines','h1','h3', 'html', 'ul', 'ul and indent', 'indent',
-        'image_title','image', 'codeblock','date_published']
+    # if post.date_published in ["", None]:
+    #     post_date = post.time_stamp_utc.strftime("%Y-%m-%d")
+    # else:
+    if post.date_published in ["", None]:
+        post_date = ""
+    else:
+        post_date = post.date_published.strftime("%Y-%m-%d")
+
     if request.method == 'POST':
-        formDict=request.form.to_dict()
-        # print('formDict::')
-        # print(formDict)
-        
-        post.title = formDict.get('blog_title')
-        post.description = formDict.get('blog_description')
-        post.date_published = datetime.strptime(formDict.get('blog_pub_date'), '%Y-%m-%d')
+        formDict = request.form.to_dict()
+
+        title = formDict.get("blog_title")
+        description = formDict.get("blog_description")
+        date = formDict.get("blog_date_published")
+
+        post.title = formDict.get("blog_title")
+        post.description = formDict.get("blog_description")
+        if formDict.get('blog_date_published') == "":
+            post.date_published = None
+        else:
+            post.date_published = datetime.strptime(formDict.get('blog_date_published'), "%Y-%m-%d")
         sess.commit()
 
-        #update row_tag and row_going_into_html in Postshtml
-        postHtml_update = sess.query(Postshtml).filter_by(post_id = post_id)
-        
-        #if title changed update first row psotHtml
-        postHtml_title = postHtml_update.filter_by(word_row_id = 1).first()
-        if post.title != postHtml_title.row_going_into_html:
-            postHtml_title.row_going_into_html = post.title
-            sess.commit()
+        flash("Post successfully updated", "success")
+        return redirect(request.url)
 
-        for i,j in formDict.items():
-            
-            if i.find('row_tag:'+str(post_id))>-1:
-                word_row_id_temp = int(i[len('row_tag:'+str(post_id))+1:])
-                update_row_temp=postHtml_update.filter_by(word_row_id = word_row_id_temp).first()
-                update_row_temp.row_tag = j
-                sess.commit()
-            if i.find('row_html:'+str(post_id))>-1:
-                word_row_id_temp = int(i[len('row_html:'+str(post_id))+1:])
-                update_row_temp=postHtml_update.filter_by(word_row_id = word_row_id_temp).first()
-                update_row_temp.row_going_into_html = j
-                sess.commit()
-        
-        if formDict.get('delete_word_row'):
-            row_to_delete = int(formDict.get('delete_word_row'))
-            sess.query(Postshtml).filter_by(post_id = post_id,word_row_id = row_to_delete).delete()
-            sess.query(Postshtmltagchars).filter_by(post_id = post_id,word_row_id = row_to_delete).delete()
-            sess.commit()
-        
-        if formDict.get('start_cons_line') and formDict.get('end_cons_line'):
-            #This will merge multiple rows if the start and end inputs are filled
-            row_to_keep = int(formDict.get('start_cons_line'))
-            row_to_move = row_to_keep + 1
-
-            while row_to_move <= int(formDict.get('end_cons_line')):
-                row_to_keep_obj=sess.query(Postshtml).filter_by(post_id=post_id, word_row_id=row_to_keep).first()
-                row_to_move_obj=sess.query(Postshtml).filter_by(post_id=post_id, word_row_id=row_to_move).first()
-                row_to_keep_obj.row_going_into_html=row_to_keep_obj.row_going_into_html+'<br>'+row_to_move_obj.row_going_into_html
-                
-                sess.query(Postshtml).filter_by(post_id=post_id, word_row_id=row_to_move).delete()
-                sess.query(Postshtmltagchars).filter_by(post_id=post_id, word_row_id=row_to_move).delete()
-                sess.commit()
-                row_to_move += 1
-
-            return redirect(url_for('blog.blog_edit',post_id=post_id ))
-
-        if formDict.get('update_lines'):
-            return redirect(url_for('blog.blog_edit',post_id=post_id ))
-
-        else:
-            #Merge one button pressed
-            #This will merge the selected tbutton tothe row above
-            for i in formDict.keys():# i is the merge button value
-                if i[:1]=='_':
-                    print('i that will become formDict_key: ', i, len(i))
-                    formDict_key = i
-                    print('int(i[6:]) that will become formDict_key: ', int(i[6:]))
-                    row_to_move = int(i[6:])
-            
-            row_to_keep=int(formDict.get(formDict_key)[8:])
-            row_to_keep_obj=sess.query(Postshtml).filter_by(post_id=post_id, word_row_id=row_to_keep).first()
-            row_to_move_obj=sess.query(Postshtml).filter_by(post_id=post_id, word_row_id=row_to_move).first()
-            row_to_keep_obj.row_going_into_html=row_to_keep_obj.row_going_into_html+'<br>'+row_to_move_obj.row_going_into_html
-            
-            sess.query(Postshtml).filter_by(post_id=post_id, word_row_id=row_to_move).delete()
-            sess.query(Postshtmltagchars).filter_by(post_id=post_id, word_row_id=row_to_move).delete()
-            sess.commit()
-
-        return redirect(url_for('blog.blog_edit',post_id=post_id ))
-
-    return render_template('blog/edit_template.html',post_id=post_id, post=post,
-        postHtml_list=zip(postHtml_list,merge_row_id_list) , column_names=column_names, published_date=published_date,
-        row_format_options=row_format_options )
+    return render_template('blog/edit_post.html', title= title, description = description, 
+        post_date = post_date, post_time_stamp_utc = post_time_stamp_utc)
 
 
 # Custom static data
@@ -492,8 +442,5 @@ def custom_static(post_id_name_string,img_dir_name,filename):
     return send_from_directory(os.path.join(current_app.config.get('DB_ROOT'),"posts", post_id_name_string, img_dir_name), filename)
 
 
-# Custom static data
-@blog.route('/<post_id_name_string>/<filename>')
-def custom_static_old(post_id_name_string,filename):
-    print("-- enterd custom static -")
-    return send_from_directory(os.path.join(current_app.config.get('DB_ROOT'),"posts", post_id_name_string,'articleDraft01.fld'), filename)
+
+
