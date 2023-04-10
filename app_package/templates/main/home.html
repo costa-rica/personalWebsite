@@ -103,37 +103,37 @@
             {% else %}
             <div class="post_social_super {{ post.social_name }}">
 
-                <a href="{{ post.url }}">
+              <a href="{{ post.url }}">
 
-                    <div class="post_social_date">
-                      {{ post.post_date }}
-                    </div>
+                <div class="post_social_date">
+                  {{ post.post_date }}
+                </div>
 
-  
-                    <div class="post_social_content"><!-- sub_title-->
-  
-                      <div class="standard_title">
-                        {% if post.social_name == "Github" %}
-                        <span class="span_dark">Repoository Name: </span>{{ post.title }}
-                        <br>
-                        <small>{{ post.description }}</small>
-                        {% elif post.social_name == "Goodreads" %}
-                        Just finished reading: <br>{{ post.title }}
-                        <br>
-                        <small>by {{ post.description }}</small>
-                        {% else %}
-                        {{ post.title }}
-                        {% endif %}
-                      </div><!-- standard_title -->
-  
-                      <div class="img_social_icon">
-                        <img class="img_social" src="../static/images/icons/{{ post.social_icon }}">
-                      </div><!-- img_social_icon -->
-  
-                    </div><!-- post_social_content -->
-                    
-                </a><!-- post.url -->
-                          
+
+                <div class="post_social_content"><!-- sub_title-->
+
+                  <div class="standard_title">
+                    {% if post.social_name == "Github" %}
+                    <span class="span_dark">Repoository Name: </span>{{ post.title }}
+                    <br>
+                    <small>{{ post.description }}</small>
+                    {% elif post.social_name == "Goodreads" %}
+                    Just finished reading: <br>{{ post.title }}
+                    <br>
+                    <small>by {{ post.description }}</small>
+                    {% else %}
+                    {{ post.title }}
+                    {% endif %}
+                  </div><!-- standard_title -->
+
+                  <div class="img_social_icon">
+                    <img class="img_social" src="../static/images/icons/{{ post.social_icon }}">
+                  </div><!-- img_social_icon -->
+
+                </div><!-- post_social_content -->
+
+              </a><!-- post.url -->
+
             </div><!-- post_social_name_super -->
             {% endif %}
 
@@ -154,40 +154,40 @@
         <div class="std_framing handles_div">
           <div class="handles_div_sub">
 
-          
-          <div class="handle_std ">
-            Medium: <a href="https://medium.com/@nrodrig1">Nick Rodriguez</a>
-          </div>
-  
-          <!-- <br> -->
-          <div class="handle_std">
-            Twitter: <a href="https://twitter.com/EvryMnRodriguez">@EvryMnRodriguez</a>
-          </div>
-  
-          <!-- <br> -->
-          <div class="handle_std">
-            Github: <a href="https://github.com/costa-rica">costa-rica</a>
-          </div>
-  
-          <!-- <br> -->
-          <div class="handle_std">
-            LinkedIn: <a href="https://www.linkedin.com/in/nick-rodriguez-0a31a133/">Nick Rodriguez</a>
-          </div>
-  
-          <!-- <br> -->
-          <div class="handle_std">
-            Goodreads: <a href="https://www.goodreads.com/costa-rica">costa-rica</a>
-          </div>
-  
-          <!-- <br> -->
-          <div class="handle_std">
-            Email: nrodrig1@gmail.com
-          </div>
-  
-          <div class="handle_std">
-            <a href="{{ url_for('main.more_about_me', _anchor='resume') }}">Resume/CV</a>
-          </div>
-        </div><!-- handles_div_sub -->
+
+            <div class="handle_std ">
+              Medium: <a href="https://medium.com/@nrodrig1">Nick Rodriguez</a>
+            </div>
+
+            <!-- <br> -->
+            <div class="handle_std">
+              Twitter: <a href="https://twitter.com/EvryMnRodriguez">@EvryMnRodriguez</a>
+            </div>
+
+            <!-- <br> -->
+            <div class="handle_std">
+              Github: <a href="https://github.com/costa-rica">costa-rica</a>
+            </div>
+
+            <!-- <br> -->
+            <div class="handle_std">
+              LinkedIn: <a href="https://www.linkedin.com/in/nick-rodriguez-0a31a133/">Nick Rodriguez</a>
+            </div>
+
+            <!-- <br> -->
+            <div class="handle_std">
+              Goodreads: <a href="https://www.goodreads.com/costa-rica">costa-rica</a>
+            </div>
+
+            <!-- <br> -->
+            <div class="handle_std">
+              Email: nrodrig1@gmail.com
+            </div>
+
+            <div class="handle_std">
+              <a href="{{ url_for('main.more_about_me', _anchor='resume') }}">Resume/CV</a>
+            </div>
+          </div><!-- handles_div_sub -->
         </div><!-- handles_div -->
 
       </div><!-- grid4_handles_div -->
@@ -198,57 +198,59 @@
 
           <div class="grid5_blog_title_super">
             {% if current_user.admin %}
-            <a href="{{ url_for('blog.blog_user_home' ) }}" class="no_show" >
-              <div class="grid5_blog_title">Blog: Peak of <i>MT Stupid</i></div>
+            <a href="{{ url_for('blog.blog_user_home' ) }}" class="no_show">
+              <div class="grid5_blog_title">Blog: Peak of <i class="allow_wrap">MT Stupid</i></div>
             </a>
-            
+
             {% else %}
             <div class="grid5_blog_title">Blog: Peak of <i>MT Stupid</i></div>
             {% endif %}
-              <div class="what_is_this_super">
-                <a href="https://medium.com/towards-data-science/my-technical-writing-journey-14ea1ca18e79">
-                  <div class="what_is_this">
-                    What is "MT Stupid"?
-                  </div><!-- what_is_this -->
-                </a>
-              </div><!-- what_is_this_super -->
+            <div class="what_is_this_super">
+              <a href="https://medium.com/towards-data-science/my-technical-writing-journey-14ea1ca18e79">
+                <div class="what_is_this">
+                  What is "MT Stupid"?
+                </div><!-- what_is_this -->
+              </a>
+            </div><!-- what_is_this_super -->
 
 
             <!-- <div class="grid5_blog_title_sub">
               (<i>Mostly things I've barely learned and trying to fortify in my mind</i>)
             </div> -->
-            
+
           </div><!-- grid5_blog_title -->
 
 
 
           {% for post in blog_posts_list %}
-        <div class="blogpost_super">
-          <a href="{{ url_for('blog.view_post', post_id_name_string=post[3]) }}">
-        
-            <div class="blogpost">
-            <div class="blogpost_date">
-              {{ post[0] }}
-            </div>
-            
-            
-            <div class="blogpost_title">
-              {{ post.1 }}
-            </div>
-            
-            
-            <div class="blogpost_description">
-              {{ post.2 }}
-            </div>
-            
-            
+          <div class="blogpost_super">
+            <a href="{{ url_for('blog.view_post', post_id_name_string=post[3]) }}">
+
+              <div class="blogpost">
+                <div class="blogpost_date">
+                  {{ post[0] }}
+                </div>
+
+                <div class="blogpost_title">
+                  {{ post.1 }}
+                </div>
+
+
+                <div class="blogpost_description">
+                  {{ post.2 }}
+                </div>
+
+              </div><!-- blogpost -->
+            </a>
+          </div><!-- blogpost_super -->
+
+
+          {% endfor %}
+
+          <div class="div_link_to_rest">
+            <a href="{{ url_for('blog.index') }}"> See more here ...</a>
           </div>
-        </a>
-        </div>
-
-
-        {% endfor %}
-        </div>
+        </div><!-- std_framing -->
 
       </div><!-- grid5_blog -->
 

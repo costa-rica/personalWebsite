@@ -196,10 +196,6 @@ body {
     }
 
 
-  
-
-
-
     .div_link_to_rest {
       display: flex;
       justify-content: end;
@@ -226,18 +222,30 @@ body {
   }
   .grid5_blog{
     padding-top:1rem;
-    .grid5_blog_title_super{
-      display:flex;
-      flex-wrap: wrap;
-    }
-    .grid5_blog_title{
+
+    .grid5_blog_title_super {
+      display: flex;
+
+      .no_show {
+        text-decoration: none;
+        width: calc(100% - 12rem);
+      }
+  }
+
+  .grid5_blog_title {
       font-size: var(--normal_font_size);
       // width:100%;
-      padding-left:1rem;
-      .no_show{
-        text-decoration: none;
-      }
-    }
+      padding-left: 1rem;
+      display: flex;
+      flex-wrap: wrap;
+      // width: calc(100% - 4rem);
+      // width: 50%;
+    // .allow_wrap{
+    //   display: flex;
+    //   flex-wrap: wrap;
+    // }
+  }
+
     .grid5_blog_title_sub{
       font-size:.9rem;
       width:100%;
@@ -280,6 +288,24 @@ body {
     }
     .blogpost_title{
       font-size: var(--normal_font_size);
+    }
+    .div_link_to_rest {
+      display: flex;
+      justify-content: end;
+      font-size: var(--normal_font_size);
+
+      a {
+        padding-left: .3rem;
+        color: var(--bs-orange);
+        font-size: var(--normal_font_size);
+      }
+
+      a:hover {
+        font-size: 1.5rem;
+        color: white;
+        border: none;
+      }
+
     }
 
   }
@@ -441,8 +467,24 @@ body {
   // }
 }
 
+//For Screen wider than 520px
+@media only screen and (min-width: 520px) {
+  .home_page{
+    .grid5_blog {
+      // grid-area: grid_name_blog;
+      .grid5_blog_title_super {
+        // display: flex;
+        // flex-wrap: wrap;
+        .no_show {
+          // text-decoration: none;
+          width: fit-content;
+        }
+      }
+    }
+  }
 
-//For Screen wider than 330px
+}
+//For Screen wider than 768px
 @media only screen and (min-width: 768px) {
   .home_page{
   .home_page_sub {
@@ -513,6 +555,26 @@ body {
 
   .grid5_blog {
     grid-area: grid_name_blog;
+  //   .grid5_blog_title_super {
+  //     display: flex;
+  //     // flex-wrap: wrap;
+  //     .no_show {
+  //       text-decoration: none;
+  //       width: fit-content;
+  //     }
+  // }
+    // .grid5_blog_title_super{
+    //   display:flex;
+    //   flex-wrap: wrap;
+    // }
+    .grid5_blog_title{
+      font-size: var(--normal_font_size);
+      // width:100%;
+      padding-left:1rem;
+      .no_show{
+        text-decoration: none;
+      }
+    }
   }
 }
 .more_about_me_super{

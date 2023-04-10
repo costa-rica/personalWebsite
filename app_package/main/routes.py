@@ -46,7 +46,7 @@ def home():
     social_posts_list = create_social_posts_list()
     display_post = create_display_post(social_posts_list)
 
-    blog_posts_list = create_blog_posts_list()
+    blog_posts_list = create_blog_posts_list(3)
 
     return render_template('main/home.html', display_post = display_post,blog_posts_list=blog_posts_list )
 

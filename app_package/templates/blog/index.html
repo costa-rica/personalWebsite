@@ -4,46 +4,68 @@
 
 {% block main %}
 
-<section class="post_index">
-    <div class="post_index_content">
+<div class="post_index">
+
+    <div class="grid5_blog">
+        <div class="std_framing">
+
+            <div class="div_link_to_rest">
+                <a href="{{ url_for('main.home') }}" id="go_home_link"> Go Home</a>
+              </div>
 
 
-        <h1>Articles</h1>
-        <!-- form method=POST -->
-    
-            <ul class="data_tools_list">
-                {% for _, blog in blog_dicts_for_index.items() %}
-                    
-                <li>
-                    <a href="{{ url_for('blog.blog_template', blog_name=blog['blog_name']) }}">
-                        <div class="data_tool_div">
-    
-                                <div class="title_div">
-    
-                                    <h2>{{ blog['title'] }}</h2>
-    
-                                </div>
-    
-                                <div class="date_div">
-                                    {{ blog['date_published'] }}<br>
-                                    by {{ blog['username'] }}
-                                </div>
-    
-                                <div class="data_tools_description">
-                                    {{ blog['description'] }}
-                                    
-                                </div>
-                            
-                        </div>
-                    </a>
-                </li>
-                {% endfor %}
-            </ul>
-    
-        <!-- form -->
+          <div class="grid5_blog_title_super">
+            {% if current_user.admin %}
+            <a href="{{ url_for('blog.blog_user_home' ) }}" class="no_show">
+              <div class="grid5_blog_title">Blog: Peak of <i>MT Stupid</i></div>
+            </a>
 
-    </div>
+            {% else %}
+            <div class="grid5_blog_title">Blog: Peak of <i>MT Stupid</i></div>
+            {% endif %}
+            <div class="what_is_this_super">
+              <a href="https://medium.com/towards-data-science/my-technical-writing-journey-14ea1ca18e79">
+                <div class="what_is_this">
+                  What is "MT Stupid"?
+                </div><!-- what_is_this -->
+              </a>
+            </div><!-- what_is_this_super -->
 
 
-</section>
+          </div><!-- grid5_blog_title -->
+
+
+
+          {% for post in blog_posts_list %}
+          <div class="blogpost_super">
+            <a href="{{ url_for('blog.view_post', post_id_name_string=post[3]) }}">
+
+              <div class="blogpost">
+                <div class="blogpost_date">
+                  {{ post[0] }}
+                </div>
+
+                <div class="blogpost_title">
+                  {{ post.1 }}
+                </div>
+
+
+                <div class="blogpost_description">
+                  {{ post.2 }}
+                </div>
+
+              </div><!-- blogpost -->
+            </a>
+          </div><!-- blogpost_super -->
+
+
+          {% endfor %}
+
+
+        </div><!-- std_framing -->
+
+      </div><!-- grid5_blog -->
+
+
+</div>
 {% endblock %}

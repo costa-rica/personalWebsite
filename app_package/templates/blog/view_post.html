@@ -1,9 +1,15 @@
 {% extends "_layout.html" %}
 {% block main %}
-<form method="POST" id="form01"></form>
 
-<div class="view_post">
-    {% include template_post_index %}
+<div class="view_post_super">
+
+    <div class="view_post">
+        <div class="div_right">
+            <a href="{{ url_for('main.home') }}" > Go home </a>
+          </div>
+        {% include template_post_index %}
+    </div>
+    
 </div>
 
 

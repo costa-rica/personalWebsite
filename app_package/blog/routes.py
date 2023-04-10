@@ -17,6 +17,7 @@ from logging.handlers import RotatingFileHandler
 import zipfile
 from werkzeug.utils import secure_filename
 import jinja2
+from app_package.main.utils import create_blog_posts_list
 
 
 #Setting up Logger
@@ -45,36 +46,40 @@ blog = Blueprint('blog', __name__, static_url_path=os.path.join(os.environ.get('
     static_folder=os.path.join(os.environ.get('DB_ROOT'),"posts"))
     
 @blog.route("/blog", methods=["GET"])
-def post_index():
+def index():
 
     #make sure word doc folder exits with in static folder
     # word_docs_dir_util()
 
-    #sorted list of published dates
-    date_pub_list=[i.date_published for i in sess.query(Blogposts).all()]
-    # create new list of sorted datetimes into increasing order
-    sorted_date_pub_list = sorted(date_pub_list)
-    #reverse new list
-    sorted_date_pub_list.sort(reverse=True)
+    blog_posts_list = create_blog_posts_list()
+    items = ['date', 'title', 'description']
 
-    #make dict of title, date_published, description
-    items=['title', 'description','date_published' ]
-    posts_list = sess.query(Blogposts).all()
-    blog_dict_for_index_sorted={}
-    for i in sorted_date_pub_list:
-        for post in posts_list:
-            if post.date_published == i:
-                # temp_dict={key: (getattr(post,key) if key!='date_published' else getattr(post,key).strftime("%b %d %Y") ) for key in items}
-                temp_dict = {key: getattr(post, key) for key in items}
-                temp_dict['date_published'] = temp_dict['date_published'].strftime("%-d %b %Y")
-                # temp_dict={key: getattr(post,key)  for key in items}
-                temp_dict['blog_name']=post.post_id_name_string
-                temp_dict['username'] = sess.query(Users).filter_by(id = post.user_id).first().username
-                # temp_dict={key: (getattr(post,key) if key=='date_published' else getattr(post,key)[:9] ) for key in items}
-                blog_dict_for_index_sorted[post.id]=temp_dict
-                posts_list.remove(post)
+    # #sorted list of published dates
+    # date_pub_list=[i.date_published for i in sess.query(Blogposts).all()]
+    # # create new list of sorted datetimes into increasing order
+    # sorted_date_pub_list = sorted(date_pub_list)
+    # #reverse new list
+    # sorted_date_pub_list.sort(reverse=True)
 
-    return render_template('blog/index.html', blog_dicts_for_index=blog_dict_for_index_sorted)
+    # #make dict of title, date_published, description
+    # items=['title', 'description','date_published' ]
+    # posts_list = sess.query(Blogposts).all()
+    # blog_dict_for_index_sorted={}
+    # for i in sorted_date_pub_list:
+    #     for post in posts_list:
+    #         if post.date_published == i:
+    #             # temp_dict={key: (getattr(post,key) if key!='date_published' else getattr(post,key).strftime("%b %d %Y") ) for key in items}
+    #             temp_dict = {key: getattr(post, key) for key in items}
+    #             temp_dict['date_published'] = temp_dict['date_published'].strftime("%-d %b %Y")
+    #             # temp_dict={key: getattr(post,key)  for key in items}
+    #             temp_dict['blog_name']=post.post_id_name_string
+    #             temp_dict['username'] = sess.query(Users).filter_by(id = post.user_id).first().username
+    #             # temp_dict={key: (getattr(post,key) if key=='date_published' else getattr(post,key)[:9] ) for key in items}
+    #             blog_dict_for_index_sorted[post.id]=temp_dict
+    #             posts_list.remove(post)
+
+    # return render_template('blog/index.html', blog_dicts_for_index=blog_dict_for_index_sorted)
+    return render_template('blog/index.html', blog_posts_list=blog_posts_list)
 
 
 @blog.route("/blog/<blog_name>", methods=["GET","POST"])

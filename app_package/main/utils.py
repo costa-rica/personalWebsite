@@ -66,7 +66,7 @@ def create_display_post(social_posts_list):
     return display_post
 
 
-def create_blog_posts_list():
+def create_blog_posts_list(number_of_posts_to_return=False):
     #Blog
     blog_posts = sess.query(Blogposts).all()
 
@@ -82,7 +82,12 @@ def create_blog_posts_list():
         
         blog_posts_list.append((post_date,post_title,post_description,post_string_id))
     
-    print("- blog_posts_list -")
-    print(blog_posts_list)
+
+    blog_posts_list.sort(key=lambda tuple_element: tuple_element[0], reverse=True)
+    if number_of_posts_to_return:
+        blog_posts_list = blog_posts_list[:number_of_posts_to_return]
+
+    # print("- blog_posts_list -")
+    # print(blog_post_list_most_recent)
 
     return blog_posts_list
