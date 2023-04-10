@@ -2,12 +2,15 @@
 .view_post_super {
     display: flex;
     justify-content: center;
+    padding:3rem 0 0 0;
 
     .view_post {
         width: calc(100% - 2rem);
         // img{border: 1px solid black;}
     }
-
+    .post{
+        padding:2rem 0 0 0;
+    }
     .div_right {
         display: flex;
         justify-content: end;
@@ -15,73 +18,91 @@
 }
 
 /* Create Post*/
-.create_post {
+.create_post_super {
     padding: var(--nav-height) 0 60px 30px;
+    display:flex;
+    justify-content: center;
 
-    // background-color: red;
-    .blog_form_div {
+    .create_post{
+        width:calc(100% - 3rem);
+    }
+    .create_post_framing {
         border: 1px solid;
         margin: 0;
         padding: 0;
         border-radius: 10px;
         background-color: var(--bs-gray-500);
         margin: 2% 5% 2% 0;
+        display:flex;
+        justify-content: center;
+    }
+    .a_div_right{
+        display:flex;
+        justify-content: end;
+        padding: 0 5rem 0 0;
+    }
+    .create_post_content {
+        // padding: 0 0 50px 20px;
+        width:calc(100% - 3rem);
+        padding: 2rem 0 0 0;
+    }
+    // .blog_form_input_div {
+    //     min-width: 150px;
+    //     max-width: 80%;
+    // }
+    .description_text_super{
+        display:flex;
+        justify-content: center;
+        padding: 0 0 1rem 0;
+    }
+    .description_text{
+        padding: 1rem;
+        background-color: var(--bs-gray-400);
+        opacity: .7;
+        border-radius: 1rem;
     }
 
-    .blog_form_sub_top {
-        padding: 0 0 50px 20px;
-
-        .input_custom {
-            width: 70%
-        }
-
-        .textarea_custom {
-            width: 100%;
-        }
-
-        .blog_form_input_div {
-            min-width: 150px;
-            max-width: 80%;
-        }
+    .new_method_input_file{
+        padding:1rem 0 0 0;
+    }
+    .new_method_input_source_dropdown{
+        padding:1rem 0 0 0;
     }
 
     .old_ws_method_div {
         display: none;
-        background-color: var(--bs-gray-400);
+        background-color: #E97451;
+        
+        padding: 1rem;
+        border-radius: 1rem;
     }
-
-    #Progress_Status {
-        width: 50%;
-        background-color: #ddd;
-        margin-left: 30px;
-    }
-
-    #myprogressBar {
-        /* Starting point of progress bar */
-        width: 0;
-        height: 20px;
-        background-color: #4CAF50;
+    .old_method_input_div{
+        opacity: .4;
     }
 
 
-    .blog_form_buttons {
-        padding: 0 0 50px 20px;
-
-        .button_custom {
-            background-color: var(--bs-cyan);
-        }
-
-        .file_custom {
-            min-width: 150px;
-            width: 56%
-        }
+    .blog_form_bottom_buttons_and_progress {
+        padding: 3rem 0 3rem 2rem;
 
         .button_div_right {
-            width: 60%;
+            display:flex;
+            justify-content: end;
+            padding: 0 5rem 0 0;
+        }
+        .btn_custom{width:10rem;}
 
-            .btn_custom {
-                float: right;
-            }
+        #Progress_Status {
+            width: 50%;
+            background-color: #ddd;
+            // margin-left: 3rem;
+            // padding:
+        }
+    
+        #myprogressBar {
+            /* Starting point of progress bar */
+            width: 0;
+            height: 20px;
+            background-color: #4CAF50;
         }
     }
 
@@ -395,7 +416,11 @@
 
     }
 
-
+    .view_post_super {
+        .view_post {
+            width: calc(100% - 10rem);
+        }
+    }
 }
 
 @media only screen and (min-width: 1200px) {

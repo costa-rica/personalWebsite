@@ -7,8 +7,7 @@ import time
 from sqlalchemy import func
 import json
 from flask_login import login_user, current_user, logout_user, login_required
-from app_package.blog.utils import create_new_html_text, get_title, save_post_html, \
-    save_post_images, replace_img_src_jinja
+from app_package.blog.utils import  get_title, replace_img_src_jinja
 from app_package.models import sess, Users, Blogposts
 from sqlalchemy import func 
 import shutil
@@ -165,78 +164,35 @@ def create_post():
         formDict = request.form.to_dict()
         print("formDict: ", formDict)
         request_files = request.files
+        
+        #######################################################
+        # NOTE: Old method comes from whatSticks09web
+        # It is deleted from code b
+        ######################################################
 
+        if request_files["new_method"].filename != "":
+            logger_blog.info(f"- new_method -")
 
-        if request_files["old_method_html"].filename != "":
-
-            
-            post_word_html_file = request.files.get('post_word_html_file')
-            post_images_zip = request.files.get('post_images_zip')
-            post_word_html_filename = post_word_html_file.filename
-
-            logger_blog.info(f"- filename is {post_word_html_filename} -")
-
-            file_path_str_to_db_templates_blog_posts = os.path.join(current_app.config.get('DB_ROOT'),"templates")
-            file_path_str_to_db_static_blog_post_images = os.path.join(current_app.config.get('DB_ROOT'),"static")
-            file_path_str_to_templates_blog_posts = os.path.join(current_app.config.root_path,"templates","blog","posts")
-            
-
-            # check if db_root/posts/post_id dir exists
-            if not os.path.exists(file_path_str_to_db_dir_blog_posts):
-                logger_blog.info(f"- making {file_path_str_to_db_dir_blog_posts} dir -")
-                os.mkdir(file_path_str_to_db_dir_blog_posts)
-
-            #check if templates/blog/posts exists
-            if not os.path.exists(file_path_str_to_templates_blog_posts):
-                logger_blog.info(f"- making templates/blog/posts dir -")
-                os.mkdir(file_path_str_to_templates_blog_posts)
-
-            # save 
-
-            # check if file name already uploaded:
-            existing_file_names_list = [i.name for i in os.scandir(file_path_str_to_templates_blog_posts)]
-            if post_word_html_filename in existing_file_names_list:
-                flash('A file with the same name has already been saved. Change file name and try again.', 'warning')
-                return redirect(request.url)
-
-            # Save blog_post_html to templates/blog/posts/
-            post_id_name_string, blog_post_new_name = save_post_html(formDict, post_word_html_file, 
-                                    file_path_str_to_templates_blog_posts, post_word_html_filename)
-
-            # Save images to static/images/blog/000id/ <-- if there is a filename
-            if post_images_zip.filename != "":
-                logger_blog.info(f"- post_images_zip is not None -")
-            
-                # check if static/images/
-
-                save_post_images(post_images_zip, post_id_name_string, blog_post_new_name)
-
-        elif request_files["new_method"].filename != "":
-
-            logger_blog.info(f"- !!!!!!! -")
-            logger_blog.info(f"- in elif for post_html_file -")
-
+            # get data from form
+            index_source = formDict.get('index_html_source')
             if formDict.get('date_published'):
                 date_published_datetime = datetime.strptime(formDict.get('date_published'), "%Y-%m-%d")
                 print(f"date_published: {date_published_datetime}")
             else:
                 date_published_datetime = datetime.utcnow()
-
             post_zip = request_files["new_method"]
             post_zip_filename = post_zip.filename
 
-            # create new_blogpost = sess.query(Blogpost).
-            new_blogpost = Blogposts(user_id=current_user.id, title="temp_name")
+            # create new_blogpost to get post_id number
+            new_blogpost = Blogposts(user_id=current_user.id, date_published =date_published_datetime)
             sess.add(new_blogpost)
             sess.commit()
 
-            # blog_id = new_blogpost.id
+            # create post_id string and 
             new_blog_id = new_blogpost.id
             new_post_dir_name = f"{new_blog_id:04d}_post"
             new_blogpost.post_id_name_string = new_post_dir_name
-            new_blogpost.date_published = date_published_datetime
             sess.commit()
-
 
             # save zip to temp_zip
             temp_zip_db_fp = os.path.join(current_app.config.get('DB_ROOT'),'temp_zip')
@@ -314,9 +270,12 @@ def create_post():
             # delete compressed file
             shutil.rmtree(temp_zip_db_fp)
 
+            print("- In line 317 of blog/routes/create_post() -")
+            print("new_blog_dir_fp + index.html: ", os.path.join(new_blog_dir_fp,"index.html"))
+
             # update new_blogpost.post_html_filename = post_id_post/index.html
             new_blogpost.post_html_filename = os.path.join(new_post_dir_name,"index.html")
-            new_blogpost.title = get_title(os.path.join(new_blog_dir_fp,"index.html"))
+            new_blogpost.title = get_title(os.path.join(new_blog_dir_fp,"index.html"), index_source)
             sess.commit()
 
             logger_blog.info(f"- filename is {new_post_dir_name} -")
@@ -324,6 +283,7 @@ def create_post():
 
         flash(f'Post added successfully!', 'success')
         return redirect(url_for('blog.blog_edit', post_id = new_blog_id))
+        # return redirect(url_for('blog.create_post'))
 
     return render_template('blog/create_post.html', default_date=default_date)
 

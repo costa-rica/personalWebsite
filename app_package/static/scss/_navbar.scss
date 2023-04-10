@@ -1,0 +1,12 @@
+/* Flash */
+.flash_custom_parent {
+  position: relative;
+  .alert_custom {
+      position: absolute;
+      top: var(--nav-height);
+      width: 100%;
+      .close_right {
+          float: right;
+      }
+  }
+}
