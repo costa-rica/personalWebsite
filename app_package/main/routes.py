@@ -147,25 +147,24 @@ def dossier_location():
 
     #get path to database/images
     # path_to_images = os.path.join(current_app.config.get('PROJ_DB_PATH'),'images/')
-    sourcePath = os.path.join(current_app.config.get('PROJ_DB_PATH'),'images/')
-    destinationPath = os.path.join(current_app.static_folder,"images","dossier")
+    sourcePath = os.path.join(current_app.config.get('DB_ROOT'),'images/')
+    destinationPath = os.path.join(current_app.config.get('DB_ROOT'),"dossier")
 
     if not os.path.exists(destinationPath):
         #copy images to static/images/dossier
         shutil.copytree(sourcePath, destinationPath)
 
     # print("- Destintation of copy: ", dest_of_copy)
-    picture = os.path.join(destinationPath, "NickAndMolly2022.jpg")
-    print("Picture path:")
-    print(picture)
+    # picture = os.path.join(destinationPath, "NickAndMolly2022.jpg")
+    # print("Picture path:")
+    # print(picture)
 
 
-    return render_template('main/dossier_location.html', path_to_images=picture)
+    return render_template('main/dossier_location.html')
 
 
 @main.route('/telecharger', methods=['GET','POST'])
 def telecharger_dossier():
-    # path_to_images = os.path.join(current_app.config.get('PROJ_DB_PATH'),'images')
-    destinationPath = os.path.join(current_app.static_folder,"images","dossier")
-    # return render_template('dossier_location.html', path_to_images=path_to_images+"/NickAndMolly2022.jpg")
-    return send_from_directory(directory=destinationPath, path="nick_rodriguez_dossier.pdf")
+    # url_for('blog.custom_static', post_id_name_string=post_id_name_string,img_dir_name='index.fld', filename='image001.png')
+    destinationPath = os.path.join(current_app.config.get('DB_ROOT'),"dossier")
+    return send_from_directory(directory=destinationPath, path=current_app.config.get('DOSSIER_FILENAME'))

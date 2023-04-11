@@ -21,6 +21,7 @@ class ConfigBase:
         self.SOCIAL_DF_FILE_NAME = 'df_social_activity.pkl'
         self.DESTINATION_PASSWORD = config_dict.get('DESTINATION_PASSWORD')
         self.PERSONAL_EMAIL = config_dict.get('PERSONAL_EMAIL')
+        self.DOSSIER_FILENAME = config_dict.get('DOSSIER_FILENAME')
 
 
 class ConfigLocal(ConfigBase):

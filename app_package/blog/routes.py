@@ -408,4 +408,12 @@ def custom_static(post_id_name_string,img_dir_name,filename):
 
 
 
+# Custom static data
+@blog.route('/custom_static_dossier/<filename>')
+def custom_static_dossier(filename):
+    print("-- enterd custom_static_dossier -")
+    return send_from_directory(os.path.join(current_app.config.get('DB_ROOT'),"dossier"), filename)
+
+
+
 
