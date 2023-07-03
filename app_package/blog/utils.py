@@ -95,8 +95,8 @@ def get_title(html_file_path_and_name, index_source):
 
 def replace_img_src_jinja(blog_post_index_file_path_and_name):
     
-    print("- blog_post_index_file_path_and_name -")
-    print(blog_post_index_file_path_and_name)
+    logger_blog.info(f"- Reading file to replace img src jinja: {blog_post_index_file_path_and_name} -")
+    logger_blog.info(blog_post_index_file_path_and_name)
     
     try:
         #read html into beautifulsoup

@@ -47,38 +47,13 @@ blog = Blueprint('blog', __name__, static_url_path=os.path.join(os.environ.get('
 @blog.route("/blog", methods=["GET"])
 def index():
 
-    #make sure word doc folder exits with in static folder
-    # word_docs_dir_util()
 
     blog_posts_list = create_blog_posts_list()
     items = ['date', 'title', 'description']
 
-    # #sorted list of published dates
-    # date_pub_list=[i.date_published for i in sess.query(Blogposts).all()]
-    # # create new list of sorted datetimes into increasing order
-    # sorted_date_pub_list = sorted(date_pub_list)
-    # #reverse new list
-    # sorted_date_pub_list.sort(reverse=True)
-
-    # #make dict of title, date_published, description
-    # items=['title', 'description','date_published' ]
-    # posts_list = sess.query(Blogposts).all()
-    # blog_dict_for_index_sorted={}
-    # for i in sorted_date_pub_list:
-    #     for post in posts_list:
-    #         if post.date_published == i:
-    #             # temp_dict={key: (getattr(post,key) if key!='date_published' else getattr(post,key).strftime("%b %d %Y") ) for key in items}
-    #             temp_dict = {key: getattr(post, key) for key in items}
-    #             temp_dict['date_published'] = temp_dict['date_published'].strftime("%-d %b %Y")
-    #             # temp_dict={key: getattr(post,key)  for key in items}
-    #             temp_dict['blog_name']=post.post_id_name_string
-    #             temp_dict['username'] = sess.query(Users).filter_by(id = post.user_id).first().username
-    #             # temp_dict={key: (getattr(post,key) if key=='date_published' else getattr(post,key)[:9] ) for key in items}
-    #             blog_dict_for_index_sorted[post.id]=temp_dict
-    #             posts_list.remove(post)
 
     # return render_template('blog/index.html', blog_dicts_for_index=blog_dict_for_index_sorted)
-    return render_template('blog/index.html', blog_posts_list=blog_posts_list)
+    return render_template('blog/index_table.html', blog_posts_list=blog_posts_list)
 
 
 @blog.route("/blog/<blog_name>", methods=["GET","POST"])
@@ -207,6 +182,7 @@ def create_post():
 
 
             new_blog_dir_fp = os.path.join(current_app.config.get('DB_ROOT'), "posts", new_post_dir_name)
+            logger_blog.info(f"- new_blog_dir_fp: {new_blog_dir_fp} -")
 
             # check new_blog_dir_fp doesn't already exists -- This is a weird check but let's just leave it in....
             if os.path.exists(new_blog_dir_fp):
@@ -226,10 +202,7 @@ def create_post():
                 print(f"- {unzipped_temp_dir} --")
                 zip_ref.extractall(unzipped_temp_dir)
 
-            print("- decompressing and extracting to here:")
-            # print(f"- created: {os.path.join(temp_zip_db_fp, zip_folder_name_nospaces)}")
-            print(f"- created: {os.path.join(temp_zip_db_fp)}")
-
+            logger_blog.info(f"- decompressing and extracting to here: {os.path.join(temp_zip_db_fp)}")
 
             unzipped_dir_list = [ f.path for f in os.scandir(unzipped_temp_dir) if f.is_dir() ]
 
@@ -241,14 +214,14 @@ def create_post():
 
             # temp_zip path
             source = unzipped_temp_dir
-            print(f"- SOURCE: {source}")
+            logger_blog.info(f"- SOURCE: {source}")
 
 
             # db/posts/0000_post
             destination = os.path.join(current_app.config.get('DB_ROOT'), "posts")
 
             dest = shutil.move(source, destination, copy_function = shutil.copytree) 
-            print("Destination path:", dest) 
+            logger_blog.info(f"Destination path: {dest}") 
 
 
             # beautiful soup to search and replace img src with {{ url_for('custom_static', ___, __ ,__)}}
@@ -269,9 +242,6 @@ def create_post():
 
             # delete compressed file
             shutil.rmtree(temp_zip_db_fp)
-
-            print("- In line 317 of blog/routes/create_post() -")
-            print("new_blog_dir_fp + index.html: ", os.path.join(new_blog_dir_fp,"index.html"))
 
             # update new_blogpost.post_html_filename = post_id_post/index.html
             new_blogpost.post_html_filename = os.path.join(new_post_dir_name,"index.html")
