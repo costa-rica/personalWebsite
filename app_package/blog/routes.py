@@ -53,7 +53,7 @@ def index():
 
 
     # return render_template('blog/index.html', blog_dicts_for_index=blog_dict_for_index_sorted)
-    return render_template('blog/index_table.html', blog_posts_list=blog_posts_list)
+    return render_template('blog/index.html', blog_posts_list=blog_posts_list)
 
 
 @blog.route("/blog/<blog_name>", methods=["GET","POST"])
