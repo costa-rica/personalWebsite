@@ -13,8 +13,6 @@ import pandas as pd
 main_api = Blueprint('main_api', __name__)
 
 
-
-
 #Setting up Logger
 formatter = logging.Formatter('%(asctime)s:%(name)s:%(message)s')
 formatter_terminal = logging.Formatter('%(asctime)s:%(filename)s:%(name)s:%(message)s')
@@ -47,7 +45,7 @@ def check_api_post():
     request_data = request.get_json()
     request_headers = request.headers
 
-    if request_headers.get('password') == current_app.config.get('DESTINATION_PASSWORD'):
+    if request_headers.get('password') == current_app.config.get('API_PASSWORD'):
         logger_main_api.info(f'--- check_api_post endpoint PASSWORD verified ---')
 
         f = open('check_api_post.txt', 'w')
@@ -66,16 +64,17 @@ def collect_new_activity():
     request_data = request.get_json()
     request_headers = request.headers
 
-    print(request_data.get('new_activity'))
-    print(type(request_data.get('new_activity')))
+    # print(request_data.get('new_activity'))
+    # print(type(request_data.get('new_activity')))
 
-    if request_headers.get('password') == current_app.config.get('DESTINATION_PASSWORD'):
+    if request_headers.get('password') == current_app.config.get('API_PASSWORD'):
         logger_main_api.info(f'--- collect_new_activity endpoint PASSWORD verified ---')
             
         # if request_data.get('new_activity')
         # print(len(request_data.get('new_activity')))
-        logger_main_api.info(f"new_activty is of tyep: {type(request_data.get('new_activity'))}")
-        logger_main_api.info(request_data.get('new_activity'))
+        # logger_main_api.info(f"new_activty is of tyep: {type(request_data.get('new_activity'))}")
+        # logger_main_api.info(request_data.get('new_activity'))
+        logger_main_api.info(f"length of received data list: {len(request_data.get('new_activity'))}")
 
         # put new post data into df_new_data
         # df_new_data = pd.DataFrame(json.loads(request_data.get('new_activity')))
@@ -96,8 +95,8 @@ def collect_new_activity():
             logger_main_api.info(f"--- {len(df_new_data)} new items sent from social aggregator ---")
             
 
-        if os.path.exists(os.path.join(current_app.config.get('PROJ_DB_PATH'),current_app.config.get('SOCIAL_DF_FILE_NAME'))):
-            df_existing = pd.read_pickle(os.path.join(current_app.config.get('PROJ_DB_PATH'),current_app.config.get('SOCIAL_DF_FILE_NAME')))
+        if os.path.exists(os.path.join(current_app.config.get('DB_ROOT'),current_app.config.get('SOCIAL_DF_FILE_NAME'))):
+            df_existing = pd.read_pickle(os.path.join(current_app.config.get('DB_ROOT'),current_app.config.get('SOCIAL_DF_FILE_NAME')))
             
             ### make unique index from network_post_id, social_name, title
             df_new_data.set_index(['network_post_id', 'social_name','title'], inplace=True)
@@ -108,12 +107,35 @@ def collect_new_activity():
             #Append to df_exisitng
             df_mirror = pd.concat([df_existing, df_to_add]).reset_index()
             #df_existing to pickle
-            df_mirror.to_pickle(os.path.join(current_app.config.get('PROJ_DB_PATH'),current_app.config.get('SOCIAL_DF_FILE_NAME')))
+            df_mirror.to_pickle(os.path.join(current_app.config.get('DB_ROOT'),current_app.config.get('SOCIAL_DF_FILE_NAME')))
         
         else:# - All data is new
-            df_new_data.to_pickle(os.path.join(current_app.config.get('PROJ_DB_PATH'),current_app.config.get('SOCIAL_DF_FILE_NAME')))
+            df_new_data.to_pickle(os.path.join(current_app.config.get('DB_ROOT'),current_app.config.get('SOCIAL_DF_FILE_NAME')))
 
         return jsonify({"message": "successfully added new social activity"})
+    else:
+        logger_main_api.info(f'- password NOT verified -')
+        return make_response('Could not verify',401)
+
+
+
+@main_api.route('/latest_post_date', methods=['GET'])
+def latest_post_date():
+    logger_main_api.info(f'--- latest_post_date endpoint accessed ---')
+    
+    # request_data = request.get_json()
+    request_headers = request.headers
+
+    # print(request_data.get('new_activity'))
+    # print(type(request_data.get('new_activity')))
+
+    if request_headers.get('password') == current_app.config.get('API_PASSWORD'):
+        logger_main_api.info(f'--- latest_post_date endpoint PASSWORD verified ---')
+
+        df = pd.read_pickle(os.path.join(current_app.config.get('DB_ROOT'),current_app.config.get('SOCIAL_DF_FILE_NAME')))
+        latest_post_date = df.post_date.max()
+        logger_main_api.info(f'--- latest_post_date: {latest_post_date} ---')
+        return jsonify({"date_of_last_post": latest_post_date})
     else:
         logger_main_api.info(f'- password NOT verified -')
         return make_response('Could not verify',401)

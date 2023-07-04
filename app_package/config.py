@@ -19,7 +19,7 @@ class ConfigBase:
         self.DB_NAME = os.environ.get('DB_NAME')
         self.SQL_URI = f"sqlite:///{self.DB_ROOT}{os.environ.get('DB_NAME')}"
         self.SOCIAL_DF_FILE_NAME = 'df_social_activity.pkl'
-        self.DESTINATION_PASSWORD = config_dict.get('DESTINATION_PASSWORD')
+        self.API_PASSWORD = config_dict.get('API_PASSWORD')
         self.PERSONAL_EMAIL = config_dict.get('PERSONAL_EMAIL')
         self.DOSSIER_FILENAME = config_dict.get('DOSSIER_FILENAME')
 

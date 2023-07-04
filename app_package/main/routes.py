@@ -55,7 +55,7 @@ def home():
 def rest_of_posts():
 
     social_posts_df = pd.read_pickle(os.path.join(current_app.config.get('DB_ROOT'), current_app.config.get('SOCIAL_DF_FILE_NAME')))
-    # social_posts_df = pd.read_pickle(os.path.join(current_app.config.get('PROJ_DB_PATH'), 'df_existing.pkl'))
+    # social_posts_df = pd.read_pickle(os.path.join(current_app.config.get('DB_ROOT'), 'df_existing.pkl'))
     social_posts_df['post_date_to_datetime'] = pd.to_datetime(social_posts_df['post_date'])
     social_posts_list_of_dicts = social_posts_df.sort_values('post_date_to_datetime', ascending=False).to_dict('records')
 
@@ -146,7 +146,7 @@ def more_about_me():
 def dossier_location():
 
     #get path to database/images
-    # path_to_images = os.path.join(current_app.config.get('PROJ_DB_PATH'),'images/')
+    # path_to_images = os.path.join(current_app.config.get('DB_ROOT'),'images/')
     sourcePath = os.path.join(current_app.config.get('DB_ROOT'),'images/')
     destinationPath = os.path.join(current_app.config.get('DB_ROOT'),"dossier")
 
