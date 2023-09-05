@@ -14,7 +14,7 @@ class ConfigBase:
     def __init__(self):
 
         self.SECRET_KEY = config_dict.get('SECRET_KEY')
-        self.WEB_ROOT = os.environ.get('WEB_ROOT')
+        self.PROJECT_ROOT = os.environ.get('PROJECT_ROOT')
         self.DB_ROOT = os.environ.get('DB_ROOT')
         self.DB_NAME = os.environ.get('DB_NAME')
         self.SQL_URI = f"sqlite:///{self.DB_ROOT}{os.environ.get('DB_NAME')}"
@@ -58,5 +58,5 @@ elif os.environ.get('CONFIG_TYPE')=='prod':
     config = ConfigProd()
     print('- whatSticks09web/app_pacakge/config: Production')
 
-print(f"webpackage location: {os.environ.get('WEB_ROOT')}")
+print(f"webpackage location: {os.environ.get('PROJECT_ROOT')}")
 print(f"config location: {os.path.join(os.environ.get('CONFIG_PATH'),os.environ.get('CONFIG_FILE_NAME')) }")

@@ -9,8 +9,8 @@ from flask_mail import Mail
 from app_package.models import login_manager
 
 
-if not os.path.exists(os.path.join(os.environ.get('WEB_ROOT'),'logs')):
-    os.makedirs(os.path.join(os.environ.get('WEB_ROOT'), 'logs'))
+if not os.path.exists(os.path.join(os.environ.get('PROJECT_ROOT'),'logs')):
+    os.makedirs(os.path.join(os.environ.get('PROJECT_ROOT'), 'logs'))
 
 # timezone 
 def timetz(*args):
@@ -26,7 +26,7 @@ formatter_terminal = logging.Formatter('%(asctime)s:%(filename)s:%(name)s:%(mess
 logger_init = logging.getLogger('__init__')
 logger_init.setLevel(logging.DEBUG)
 
-file_handler = RotatingFileHandler(os.path.join(os.environ.get('WEB_ROOT'),'logs','__init__.log'), mode='a', maxBytes=5*1024*1024,backupCount=2)
+file_handler = RotatingFileHandler(os.path.join(os.environ.get('PROJECT_ROOT'),'logs','__init__.log'), mode='a', maxBytes=5*1024*1024,backupCount=2)
 file_handler.setFormatter(formatter)
 
 

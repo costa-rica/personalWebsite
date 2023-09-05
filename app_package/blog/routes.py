@@ -29,7 +29,7 @@ logger_blog.setLevel(logging.DEBUG)
 
 
 #where do we store logging information
-file_handler = RotatingFileHandler(os.path.join(os.environ.get('WEB_ROOT'),"logs",'blog_routes.log'), mode='a', maxBytes=5*1024*1024,backupCount=2)
+file_handler = RotatingFileHandler(os.path.join(os.environ.get('PROJECT_ROOT'),"logs",'blog_routes.log'), mode='a', maxBytes=5*1024*1024,backupCount=2)
 file_handler.setFormatter(formatter)
 
 #where the stream_handler will print
@@ -41,7 +41,7 @@ logger_blog.addHandler(file_handler)
 logger_blog.addHandler(stream_handler)
 
 # blog = Blueprint('blog', __name__)
-blog = Blueprint('blog', __name__, static_url_path=os.path.join(os.environ.get('WEB_ROOT'),"app_package","static"), 
+blog = Blueprint('blog', __name__, static_url_path=os.path.join(os.environ.get('PROJECT_ROOT'),"app_package","static"), 
     static_folder=os.path.join(os.environ.get('DB_ROOT'),"posts"))
     
 @blog.route("/blog", methods=["GET"])
